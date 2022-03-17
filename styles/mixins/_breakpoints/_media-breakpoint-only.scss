@@ -1,0 +1,27 @@
+@mixin media-breakpoint-only($point) {
+	@if ($point == xs) {
+		@media (max-width: $grid_breakpoint_xs_end) {
+			@content;
+		}
+	} @else if ($point == sm) {
+		@media (min-width: $grid_breakpoint_sm_start) and (max-width: $grid_breakpoint_sm_end) {
+			@content;
+		}
+	} @else if ($point == md) {
+		@media (min-width: $grid_breakpoint_md_start) and (max-width: $grid_breakpoint_md_end) {
+			@content;
+		}
+	} @else if ($point == lg) {
+		@media (min-width: $grid_breakpoint_lg_start) and (max-width: $grid_breakpoint_lg_end) {
+			@content;
+		}
+	} @else if ($point == xl) {
+		@media (min-width: $grid_breakpoint_xl_start) and (max-width: $grid_breakpoint_xl_end) {
+			@content;
+		}
+	} @else if ($point == xxl) {
+		@media (min-width: $grid_breakpoint_xxl_start) {
+			@content;
+		}
+	}
+}

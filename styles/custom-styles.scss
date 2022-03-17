@@ -1,1 +1,12 @@
+/*
+
+Please add any custom CSS code in here, it will be easier to transfer if updating themes.
+
+We highly recommend labelling changes, or App installs, so these can also be updated or removed as needed.
+
+*/
+
+@import './abstracts/base';
+@import './mixins/mixins';
 @import './components/components';
+@import './pages/pages';
