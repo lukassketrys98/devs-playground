@@ -1,612 +1,433 @@
-{% comment %}theme-check-disable UndefinedObject{% endcomment %}
-{{ 'section-footer.css' | asset_url | stylesheet_tag }}
-<link rel="stylesheet" href="{{ 'component-newsletter.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'component-list-payment.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'component-list-social.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'component-rte.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'disclosure.css' | asset_url }}" media="print" onload="this.media='all'">
+{{ 'section-footer.min.css' | asset_url | stylesheet_tag }}
 
-<noscript>{{ 'component-newsletter.css' | asset_url | stylesheet_tag }}</noscript>
-<noscript>{{ 'component-list-menu.css' | asset_url | stylesheet_tag }}</noscript>
-<noscript>{{ 'component-list-payment.css' | asset_url | stylesheet_tag }}</noscript>
-<noscript>{{ 'component-list-social.css' | asset_url | stylesheet_tag }}</noscript>
-<noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
-<noscript>{{ 'disclosure.css' | asset_url | stylesheet_tag }}</noscript>
+{% assign footer = false %}
 
-{%- style -%}
-  .footer {
-    margin-top: {{ section.settings.margin_top | times: 0.75 | round: 0 }}px;
-  }
+{% if section.blocks.size > 0 %}
+  {% assign footer = true %}
+{% endif %}
 
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
-  }
+{% if section.settings.paymentIcons %}
+  {% render "icons-payment.svg" %}
+{% endif %}
 
-  @media screen and (min-width: 750px) {
-    .footer {
-      margin-top: {{ section.settings.margin_top }}px;
-    }
+<footer class="main-footer-wrapper" data-footer-wrapper data-section-id="{{ section.id }}" data-section-type="footer">
+  <div data-footer>
 
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
-    }
-  }
-{%- endstyle -%}
+    {% if footer %}
+      <div class="main-footer{% if section.settings.centerFooter %} centered{% endif %}">
+        <div class="main-footer-inner{% if section.settings.stretchFooter and section.blocks.size < 4 %} stretch{% else %} grid{% endif %}">
 
-<footer class="footer color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
-  {%- if section.blocks.size > 0 or section.settings.newsletter_enable or section.settings.show_social -%}
-    <div class="footer__content-top page-width">
-      {%- if section.blocks.size > 0 -%}
-        {%- liquid
-          if section.blocks.size == 9
-            assign footer_grid_class = 'grid--3-col-tablet'
-          elsif section.blocks.size > 6
-            assign footer_grid_class = 'grid--4-col-desktop'
-          elsif section.blocks.size > 4
-            assign footer_grid_class = 'grid--3-col-tablet'
-          endif
-        -%}
-        <div class="footer__blocks-wrapper grid grid--1-col grid--2-col grid--4-col-tablet {{ footer_grid_class }}">
-          {%- for block in section.blocks -%}
-            <div class="footer-block grid__item{% if block.type == 'link_list' and block.settings.heading != blank %} footer-block--menu{% endif %}" {{ block.shopify_attributes }}>
-              {%- if block.settings.heading != blank -%}
-                <h2 class="footer-block__heading">{{- block.settings.heading | escape -}}</h2>
-              {%- endif -%}
-
-              {%- case block.type -%}
-                {%- when 'text' -%}
-                  <div class="footer-block__details-content rte">
-                    {{ block.settings.subtext }}
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when "footer-text" %}
+                <div class="grid-item-25 footer-menu footer-text" {{ block.shopify_attributes }}>
+                  <h4 class="section-title">{{ block.settings.title | escape }}</h4>
+                  <div class="rte">
+                    {{ block.settings.text }}
                   </div>
-                {%- when 'link_list' -%}
-                  {%- if block.settings.menu != blank and block.settings.heading != blank -%}
-                    <ul class="footer-block__details-content list-unstyled">
-                      {%- for link in block.settings.menu.links -%}
-                        <li>
-                          <a href="{{ link.url }}" class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}">
-                            {{ link.title }}
-                          </a>
-                        </li>
-                      {%- endfor -%}
+                </div>
+
+              {% when "footer-menu" %}
+                {% assign menu = linklists[block.settings.menu] %}
+                {% if menu.links.size > 0 or block.settings.menu-title != blank %}
+                  <div class="grid-item-25 footer-menu footer-menu-links" {{ block.shopify_attributes }}>
+                    {% if block.settings.menu-title != blank %}<h4 class="section-title">{{ block.settings.menu-title }}</h4>{% endif %}
+                    <ul>
+                      {% for link in menu.links %}
+                        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                      {% endfor %}
                     </ul>
-                  {%- endif -%}
-                {%- when 'image' -%}
-                  <div class="footer-block__details-content footer-block-image {{ block.settings.alignment }}">
-                    {%- if block.settings.image != blank -%}
-                      {%- assign image_size = block.settings.image_width | append: 'x' -%}
-                      <img
-                        srcset= "{{ block.settings.image | img_url: image_size }}, {{ block.settings.image | img_url: image_size, scale: 2 }} 2x"
-                        src="{{ block.settings.image | img_url: '400x' }}"
-                        alt="{{ block.settings.image.alt | escape }}"
-                        loading="lazy"
-                        width="{{ block.settings.image.width }}"
-                        height="{{ block.settings.image.height }}"
-                        style="max-width: min(100%, {{ block.settings.image_width }}px);"
-                      >
-                    {%- else -%}
-                      {{ 'image' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
-                    {%- endif -%}
                   </div>
-                {%- endcase -%}
-            </div>
-          {%- endfor -%}
+                {% endif %}
+
+              {% when "footer-contact" %}
+                <div class="grid-item-25 footer-menu footer-social-contact" {{ block.shopify_attributes }}>
+                  <div class="footer-contact-wrapper">
+                    <h4 class="section-title">{{ block.settings.contactTitle }}</h4>
+                    <div class="footer-contact rte">
+                      {{ block.settings.richtext }}
+                    </div>
+                  </div>
+                </div>
+
+              {% when "footer-social" %}
+                <div class="grid-item-25 footer-menu footer-social-contact footer-social-media" {{ block.shopify_attributes }}>
+                  <h4 class="section-title footer-social-header">{{ block.settings.socialTitle }}</h4>
+                  {% render 'social', settings: settings %}
+                </div>
+
+              {% when "mailing-list" %}
+                {% assign mailing-title = block.settings.mailingTitle %}
+                {% render 'mailing-list', block: block, context: "footer-menu", mailTitle: mailing-title %}
+
+            {% endcase %}
+          {% endfor %}
         </div>
-      {%- endif -%}
-
-      <div class="footer-block--newsletter">
-        {%- if section.settings.newsletter_enable -%}
-          <div class="footer-block__newsletter">
-            {%- if section.settings.newsletter_heading != blank -%}
-              <h2 class="footer-block__heading">{{ section.settings.newsletter_heading | escape }}</h2>
-            {%- endif -%}
-            {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
-              <input type="hidden" name="contact[tags]" value="newsletter">
-              <div class="newsletter-form__field-wrapper">
-                <div class="field">
-                  <input
-                    id="NewsletterForm--{{ section.id }}"
-                    type="email"
-                    name="contact[email]"
-                    class="field__input"
-                    value="{{ form.email }}"
-                    aria-required="true"
-                    autocorrect="off"
-                    autocapitalize="off"
-                    autocomplete="email"
-                    {% if form.errors %}
-                      autofocus
-                      aria-invalid="true"
-                      aria-describedby="ContactFooter-error"
-                    {% elsif form.posted_successfully? %}
-                      aria-describedby="ContactFooter-success"
-                    {% endif %}
-                    placeholder="{{ 'newsletter.label' | t }}"
-                    required
-                  >
-                  <label class="field__label" for="NewsletterForm--{{ section.id }}">
-                    {{ 'newsletter.label' | t }}
-                  </label>
-                  <button type="submit" class="newsletter-form__button field__button" name="commit" id="Subscribe" aria-label="{{ 'newsletter.button_label' | t }}">
-                    {% render 'icon-arrow' %}
-                  </button>
-                </div>
-                {%- if form.errors -%}
-                  <small class="newsletter-form__message form__message" id="ContactFooter-error">{% render 'icon-error' %}{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</small>
-                {%- endif -%}
-              </div>
-              {%- if form.posted_successfully? -%}
-                <h3 class="newsletter-form__message newsletter-form__message--success form__message" id="ContactFooter-success" tabindex="-1" autofocus>{% render 'icon-success' %}{{ 'newsletter.success' | t }}</h3>
-              {%- endif -%}
-            {%- endform -%}
-          </div>
-        {%- endif -%}
-
-        {%- if section.settings.show_social -%}
-          <ul class="footer__list-social list-unstyled list-social" role="list">
-            {%- if settings.social_twitter_link != blank -%}
-              <li class="list-social__item">
-                <a href="{{ settings.social_twitter_link }}" class="link list-social__link" >
-                  {%- render 'icon-twitter' -%}
-                  <span class="visually-hidden">{{ 'general.social.links.twitter' | t }}</span>
-                </a>
-              </li>
-            {%- endif -%}
-            {%- if settings.social_facebook_link != blank -%}
-              <li class="list-social__item">
-                <a href="{{ settings.social_facebook_link }}" class="link list-social__link" >
-                  {%- render 'icon-facebook' -%}
-                  <span class="visually-hidden">{{ 'general.social.links.facebook' | t }}</span>
-                </a>
-              </li>
-            {%- endif -%}
-            {%- if settings.social_pinterest_link != blank -%}
-              <li class="list-social__item">
-                <a href="{{ settings.social_pinterest_link }}" class="link list-social__link" >
-                  {%- render 'icon-pinterest' -%}
-                  <span class="visually-hidden">{{ 'general.social.links.pinterest' | t }}</span>
-                </a>
-              </li>
-            {%- endif -%}
-            {%- if settings.social_instagram_link != blank -%}
-              <li class="list-social__item">
-                <a href="{{ settings.social_instagram_link }}" class="link list-social__link" >
-                  {%- render 'icon-instagram' -%}
-                  <span class="visually-hidden">{{ 'general.social.links.instagram' | t }}</span>
-                </a>
-              </li>
-            {%- endif -%}
-            {%- if settings.social_tiktok_link != blank -%}
-              <li class="list-social__item">
-                <a href="{{ settings.social_tiktok_link }}" class="link list-social__link" >
-                  {%- render 'icon-tiktok' -%}
-                  <span class="visually-hidden">{{ 'general.social.links.tiktok' | t }}</span>
-                </a>
-              </li>
-            {%- endif -%}
-            {%- if settings.social_tumblr_link != blank -%}
-              <li class="list-social__item">
-                <a href="{{ settings.social_tumblr_link }}" class="link list-social__link" >
-                  {%- render 'icon-tumblr' -%}
-                  <span class="visually-hidden">{{ 'general.social.links.tumblr' | t }}</span>
-                </a>
-              </li>
-            {%- endif -%}
-            {%- if settings.social_snapchat_link != blank -%}
-              <li class="list-social__item">
-                <a href="{{ settings.social_snapchat_link }}" class="link list-social__link" >
-                  {%- render 'icon-snapchat' -%}
-                  <span class="visually-hidden">{{ 'general.social.links.snapchat' | t }}</span>
-                </a>
-              </li>
-            {%- endif -%}
-            {%- if settings.social_youtube_link != blank -%}
-              <li class="list-social__item">
-                <a href="{{ settings.social_youtube_link }}" class="link list-social__link" >
-                  {%- render 'icon-youtube' -%}
-                  <span class="visually-hidden">{{ 'general.social.links.youtube' | t }}</span>
-                </a>
-              </li>
-            {%- endif -%}
-            {%- if settings.social_vimeo_link != blank -%}
-              <li class="list-social__item">
-                <a href="{{ settings.social_vimeo_link }}" class="link list-social__link" >
-                  {%- render 'icon-vimeo' -%}
-                  <span class="visually-hidden">{{ 'general.social.links.vimeo' | t }}</span>
-                </a>
-              </li>
-            {%- endif -%}
-          </ul>
-        {%- endif -%}
       </div>
-    </div>
-  {%- endif -%}
+    {% endif %}
 
-  <div class="footer__content-bottom">
-    <div class="footer__content-bottom-wrapper page-width">
-      <div class="footer__column footer__localization isolate">
-        {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
-          <noscript>
-            {%- form 'localization', id: 'FooterCountryFormNoScript', class: 'localization-form' -%}
-              <div class="localization-form__select">
-                <h2 class="visually-hidden" id="FooterCountryLabelNoScript">{{ 'localization.country_label' | t }}</h2>
-                <select class="localization-selector link" name="country_code" aria-labelledby="FooterCountryLabelNoScript">
-                  {%- for country in localization.available_countries -%}
-                    <option value="{{ country.iso_code }}" {%- if country.iso_code == localization.country.iso_code %} selected{% endif %}>
-                      {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
-                    </option>
-                  {%- endfor -%}
-                </select>
-                {% render 'icon-caret' %}
-              </div>
-              <button class="button button--tertiary">{{ 'localization.update_country' | t }}</button>
-            {%- endform -%}
-          </noscript>
-          <localization-form>
-            {%- form 'localization', id: 'FooterCountryForm', class: 'localization-form' -%}
-              <div class="no-js-hidden">
-                <h2 class="caption-large text-body" id="FooterCountryLabel">{{ 'localization.country_label' | t }}</h2>
-                <div class="disclosure">
-                  <button type="button" class="disclosure__button localization-form__select localization-selector link link--text caption-large" aria-expanded="false" aria-controls="FooterCountryList" aria-describedby="FooterCountryLabel">
-                    {{ localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})
-                    {% render 'icon-caret' %}
-                  </button>
-                  <ul id="FooterCountryList" role="list" class="disclosure__list list-unstyled" hidden>
-                    {%- for country in localization.available_countries -%}
-                      <li class="disclosure__item" tabindex="-1">
-                        <a class="link link--text disclosure__link caption-large{% if country.iso_code == localization.country.iso_code %} disclosure__link--active{% endif %} focus-inset" href="#"{% if country.iso_code == localization.country.iso_code %} aria-current="true"{% endif %} data-value="{{ country.iso_code }}">
-                          {{ country.name }} <span class="localization-form__currency">({{ country.currency.iso_code }} {{ country.currency.symbol }})</span>
-                        </a>
-                      </li>
-                    {%- endfor -%}
-                  </ul>
-                </div>
-                <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
-              </div>
-            {%- endform -%}
-          </localization-form>
-        {%- endif -%}
+    <div class="footer-lower">
+      <p class="footer-copyright">
+        &copy; {{ "now" | date: "%Y" }} <span itemprop="name">{{ shop.name | link_to: shop.url }}</span><br>
+        {{ powered_by_link }}
+      </p>
 
-        {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
-          <noscript>
-            {%- form 'localization', id: 'FooterLanguageFormNoScript', class: 'localization-form' -%}
-              <div class="localization-form__select">
-                <h2 class="visually-hidden" id="FooterLanguageLabelNoScript">{{ 'localization.language_label' | t }}</h2>
-                <select class="localization-selector link" name="locale_code" aria-labelledby="FooterLanguageLabelNoScript">
-                  {%- for language in localization.available_languages -%}
-                    <option value="{{ language.iso_code }}" lang="{{ language.iso_code }}" {%- if language.iso_code == localization.language.iso_code %} selected{% endif %}>
-                      {{ language.endonym_name | capitalize }}
-                    </option>
-                  {%- endfor -%}
-                </select>
-                {% render 'icon-caret' %}
-              </div>
-              <button class="button button--tertiary">{{ 'localization.update_language' | t }}</button>
-            {%- endform -%}
-          </noscript>
+      <div class="footer-lower-right">
+        {% render 'localization-selectors', showLocaleSelector: section.settings.showLocaleSelector, showCurrencySelector: section.settings.showCurrencySelector, direction: "up" %}
 
-          <localization-form>
-            {%- form 'localization', id: 'FooterLanguageForm', class: 'localization-form' -%}
-              <div class="no-js-hidden">
-                <h2 class="caption-large text-body" id="FooterLanguageLabel">{{ 'localization.language_label' | t }}</h2>
-                <div class="disclosure">
-                  <button type="button" class="disclosure__button localization-form__select localization-selector link link--text caption-large" aria-expanded="false" aria-controls="FooterLanguageList" aria-describedby="FooterLanguageLabel">
-                    {{ localization.language.endonym_name | capitalize }}
-                    {% render 'icon-caret' %}
-                  </button>
-                  <ul id="FooterLanguageList" role="list" class="disclosure__list list-unstyled" hidden>
-                    {%- for language in localization.available_languages -%}
-                      <li class="disclosure__item" tabindex="-1">
-                        <a class="link link--text disclosure__link caption-large{% if language.iso_code == localization.language.iso_code %} disclosure__link--active{% endif %} focus-inset" href="#" hreflang="{{ language.iso_code }}" lang="{{ language.iso_code }}"{% if language.iso_code == localization.language.iso_code %} aria-current="true"{% endif %} data-value="{{ language.iso_code }}">
-                          {{ language.endonym_name | capitalize }}
-                        </a>
-                      </li>
-                    {%- endfor -%}
-                  </ul>
-                </div>
-                <input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}">
-              </div>
-            {%- endform -%}
-          </localization-form>
-        {%- endif -%}
-      </div>
-      <div class="footer__column footer__column--info">
-        {%- if section.settings.payment_enable -%}
-          <div class="footer__payment">
-            <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
-            <ul class="list list-payment" role="list">
-              {%- for type in shop.enabled_payment_types -%}
-                <li class="list-payment__item">
-                  {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
-                </li>
-              {%- endfor -%}
+        {% if section.settings.paymentIcons and shop.enabled_payment_types.size > 0 %}
+          <div class="footer-payment">
+            <ul>
+              {% for type in shop.enabled_payment_types %}
+                <li>{{ type | payment_type_svg_tag }}</li>
+              {% endfor %}
             </ul>
           </div>
-        {%- endif -%}
-        <div class="footer__copyright caption">
-          <small class="copyright__content">&copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: routes.root_url }}</small>
-          <small class="copyright__content">{{ powered_by_link }}</small>
-        </div>
+        {% endif %}
       </div>
     </div>
   </div>
 </footer>
 
-{% javascript %}
-  class LocalizationForm extends HTMLElement {
-    constructor() {
-      super();
-      this.elements = {
-        input: this.querySelector('input[name="locale_code"], input[name="country_code"]'),
-        button: this.querySelector('button'),
-        panel: this.querySelector('ul'),
-      };
-      this.elements.button.addEventListener('click', this.openSelector.bind(this));
-      this.elements.button.addEventListener('focusout', this.closeSelector.bind(this));
-      this.addEventListener('keyup', this.onContainerKeyUp.bind(this));
-
-      this.querySelectorAll('a').forEach(item => item.addEventListener('click', this.onItemClick.bind(this)));
-    }
-
-    hidePanel() {
-      this.elements.button.setAttribute('aria-expanded', 'false');
-      this.elements.panel.setAttribute('hidden', true);
-    }
-
-    onContainerKeyUp(event) {
-      if (event.code.toUpperCase() !== 'ESCAPE') return;
-
-      this.hidePanel();
-      this.elements.button.focus();
-    }
-
-    onItemClick(event) {
-      event.preventDefault();
-      const form = this.querySelector('form');
-      this.elements.input.value = event.currentTarget.dataset.value;
-      if (form) form.submit();
-    }
-
-    openSelector() {
-      this.elements.button.focus();
-      this.elements.panel.toggleAttribute('hidden');
-      this.elements.button.setAttribute('aria-expanded', (this.elements.button.getAttribute('aria-expanded') === 'false').toString());
-    }
-
-    closeSelector(event) {
-      const shouldClose = event.relatedTarget && event.relatedTarget.nodeName === 'BUTTON';
-      if (event.relatedTarget === null || shouldClose) {
-        this.hidePanel();
-      }
-    }
-  }
-
-  customElements.define('localization-form', LocalizationForm);
-{% endjavascript %}
-
 {% schema %}
 {
-  "name": "t:sections.footer.name",
-  "blocks": [
-    {
-      "type": "link_list",
-      "name": "t:sections.footer.blocks.link_list.name",
-      "settings": [
-        {
-          "type": "text",
-          "id": "heading",
-          "default": "Quick links",
-          "label": "t:sections.footer.blocks.link_list.settings.heading.label",
-          "info": "t:sections.footer.blocks.link_list.settings.heading.info"
-        },
-        {
-          "type": "link_list",
-          "id": "menu",
-          "default": "footer",
-          "label": "t:sections.footer.blocks.link_list.settings.menu.label",
-          "info": "t:sections.footer.blocks.link_list.settings.menu.info"
-        }
-      ]
+    "name": {
+        "en": "Footer",
+        "de": "Fußzeile",
+        "es": "Pie de página",
+        "fr": "Pied de page",
+        "pt-PT": "Rodapé"
     },
-    {
-      "type": "text",
-      "name": "t:sections.footer.blocks.text.name",
-      "settings": [
+    "max_blocks": 4,
+    "settings": [
         {
-          "type": "text",
-          "id": "heading",
-          "default": "Heading",
-          "label": "t:sections.footer.blocks.text.settings.heading.label"
-        },
-        {
-          "type": "richtext",
-          "id": "subtext",
-          "default": "<p>Share contact information, store details, and brand content with your customers.</p>",
-          "label": "t:sections.footer.blocks.text.settings.subtext.label"
-        }
-      ]
-    },
-    {
-      "type": "image",
-      "name": "Image",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image"
-        },
-        {
-          "type": "range",
-          "id": "image_width",
-          "min": 50,
-          "max": 200,
-          "step": 5,
-          "unit": "px",
-          "label": "Image width",
-          "default": 100
-        },
-        {
-          "type": "select",
-          "id": "alignment",
-          "label": "Image alignment on large screen",
-          "options": [
-            {
-              "value": "",
-              "label": "Left"
+            "type": "checkbox",
+            "id": "paymentIcons",
+            "label": {
+                "en": "Show payment icons",
+                "de": "Zahlungssymbole anzeigen",
+                "es": "Mostrar iconos de pago",
+                "fr": "Afficher les icônes de paiement",
+                "pt-PT": "Mostrar ícones de pagamento"
             },
-            {
-              "value": "center",
-              "label": "Center"
-            },
-            {
-              "value": "right",
-              "label": "Right"
+            "default": false
+        },
+        {
+            "type": "checkbox",
+            "id": "centerFooter",
+            "label": {
+                "en": "Center content",
+                "de": "Inhalt zentrieren",
+                "es": "Centrar el contenido",
+                "fr": "Centrer le contenu",
+                "pt-PT": "Centrar conteúdo"
             }
-          ],
-          "default": "center"
+        },
+        {
+            "type": "checkbox",
+            "id": "stretchFooter",
+            "label": {
+              "en": "Allow sections to always fill the width of the footer",
+              "de": "Den Abschnitten immer erlauben, die volle Breite der Fußzeile zu füllen.",
+              "es": "Dejar que las secciones ocupen siempre el ancho del pie de página",
+              "fr": "Autorisez les sections à toujours remplir la largeur du pied de page",
+              "pt-PT": "Permitir que as secções preencham sempre a largura do rodapé"
+            }
+        },
+        {
+            "type": "header",
+            "content": {
+                "en": "Language Selector",
+                "de": "Sprachauswahl",
+                "es": "Selector de idioma",
+                "fr": "Sélecteur de langue",
+                "pt-PT": "Seletor de Idioma"
+            },
+            "info": {
+                "en": "To add a language, go to your [language settings.](/admin/settings/languages)",
+                "de": "Gehen Sie zu Ihren [Spracheinstellungen](/admin/settings/languages), um eine Sprache hinzuzufügen.",
+                "es": "Para agregar un idioma, ve a tu[configuración de idioma](/admin/settings/languages)",
+                "fr": "Pour ajouter une langue, allez dans vos [paramètres de langue.](/admin/settings/languages).",
+                "pt-PT": "Para adicionar um idioma, aceda a [definições de idioma.](/admin/settings/languages)"
+            }
+        },
+        {
+            "type": "checkbox",
+            "id": "showLocaleSelector",
+            "label": {
+                "en": "Show language selector",
+                "de": "Sprachauswahl anzeigen",
+                "es": "Mostrar el selector de idioma",
+                "fr": "Afficher le sélecteur de langue",
+                "pt-PT": "Mostrar seletor de idioma"
+            },
+            "default": true
+        },
+        {
+            "type": "header",
+            "content": {
+                "en": "Currency Selector",
+                "de": "Währungsauswahl",
+                "es": "Selector de moneda",
+                "fr": "Sélecteur de devise",
+                "pt-PT": "Seletor de Moeda"
+            },
+            "info": {
+                "en": "To add a currency, go to your [payment settings.](/admin/settings/payments)",
+                "de": "Rufen Sie Ihre [Zahlungseinstellungen](/admin/settings/payments) auf, um eine Währung hinzuzufügen",
+                "es": "Para añadir una moneda, vaya a su [configuración de pago](/admin/settings/payments)",
+                "fr": "Pour ajouter une devise, accédez à vos [paramètres de paiement](/admin/settings/payments)",
+                "pt-PT": "Para adicionar uma divisa, vá às suas [definições de pagamento](/admin/settings/payments)"
+            }
+        },
+        {
+            "type": "checkbox",
+            "id": "showCurrencySelector",
+            "label": {
+                "en": "Show currency selector",
+                "de": "Währungsauswahl anzeigen",
+                "es": "Mostrar el selector de moneda",
+                "fr": "Afficher le sélecteur de devise",
+                "pt-PT": "Mostrar seletor de moeda"
+            },
+            "default": true
+        }
+    ],
+    "blocks": [
+        {
+            "name": {
+                "en": "Contact info",
+                "de": "Kontaktdaten",
+                "es": "Información de contacto",
+                "fr": "Coordonnées ",
+                "pt-PT": "Informações de contacto"
+            },
+            "type": "footer-contact",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "contactTitle",
+                    "label": {
+                        "en": "Heading",
+                        "de": "Überschrift",
+                        "es": "Encabezado",
+                        "fr": "Rubrique",
+                        "pt-PT": "Título"
+                    },
+                    "default": {
+                        "en": "Contact us",
+                        "de": "Kontaktieren Sie uns",
+                        "es": "Ponte en contacto con nosotros",
+                        "fr": "Nous contacter",
+                        "pt-PT": "Contacte-nos"
+                    }
+                },
+                {
+                    "type": "richtext",
+                    "id": "richtext",
+                    "label": {
+                        "en": "Text",
+                        "de": "Text",
+                        "es": "Texto",
+                        "fr": "Texte",
+                        "pt-PT": "Texto"
+                    },
+                    "default": {
+                        "en": "<p>Share store details, promotions, or brand content with your customers.</p>",
+                        "de": "<p>Teilen Sie Einzelheiten zum Store, Werbeaktionen oder Markeninhalte mit Ihren Kunden.</p>",
+                        "es": "<p>Comparta detalles de la tienda, promociones o contenido de la marca con sus clientes.</p>",
+                        "fr": "<p>Partagez les détails du magasin, les promotions ou le contenu de la marque avec vos clients. </p>",
+                        "pt-PT": "<p>Partilhe detalhes, promoções ou conteúdo da marca da loja com os seus clientes.</p>"
+                    }
+                }
+            ]
+        },
+        {
+            "name": {
+                "en": "Mailing list",
+                "de": "E-Mail-Verteiler",
+                "es": "Lista de correo",
+                "fr": "Liste de diffusion",
+                "pt-PT": "Lista de correio"
+            },
+            "type": "mailing-list",
+            "limit": 1,
+            "settings": [
+                {
+                   "type": "paragraph",
+                   "content": "Subscribers are added to the 'Customers' section in the admin under 'Email subscribers'."
+                },
+                {
+                    "type": "text",
+                    "id": "mailingTitle",
+                    "label": {
+                        "en": "Heading",
+                        "de": "Überschrift",
+                        "es": "Encabezado",
+                        "fr": "Rubrique",
+                        "pt-PT": "Título"
+                    },
+                    "default": {
+                        "en": "Get the newsletter",
+                        "de": "Newsletter erhalten",
+                        "es": "Recibe el boletín",
+                        "fr": "Recevez la newsletter",
+                        "pt-PT": "Receba o boletim informativo"
+                    }
+                },
+                {
+                    "type": "richtext",
+                    "id": "text",
+                    "label": {
+                        "en": "Text",
+                        "de": "Text",
+                        "es": "Texto",
+                        "fr": "Texte",
+                        "pt-PT": "Texto"
+                    }
+                }
+            ]
+        },
+        {
+            "name": {
+                "en": "Footer menu",
+                "de": "Menü",
+                "es": "Menú",
+                "fr": "Menu",
+                "pt-PT": "Menu"
+            },
+            "type": "footer-menu",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "menu-title",
+                    "label": {
+                        "en": "Heading",
+                        "de": "Überschrift",
+                        "es": "Encabezado",
+                        "fr": "Rubrique",
+                        "pt-PT": "Título"
+                    },
+                    "default": {
+                        "en": "Quick links",
+                        "de": "Quick-Links",
+                        "es": "Enlaces rápidos",
+                        "fr": "Liens rapides",
+                        "pt-PT": "Hiperligações rápidas"
+                    }
+                },
+                {
+                    "type": "link_list",
+                    "id": "menu",
+                    "label": {
+                        "en": "Footer menu",
+                        "de": "Fußzeilenmenü",
+                        "es": "Menú de pie de página",
+                        "fr": "Menu du pied de page",
+                        "pt-PT": "Menu de rodapé"
+                    },
+                    "info": {
+                        "en": "This menu won't show drop-down items",
+                        "de": "Dieses Menü zeigt keine Drop-down-Elemente an",
+                        "es": "Este menú no mostrará elementos desplegables",
+                        "fr": "Ce menu n'affichera pas les éléments de la liste déroulante",
+                        "pt-PT": "Este menu não mostra artigos em lista pendente"
+                    }
+                }
+            ]
+        },
+        {
+            "name": {
+                "en": "Social media",
+                "de": "Social Media",
+                "es": "Redes sociales",
+                "fr": "Médias sociaux",
+                "pt-PT": "Redes sociais"
+            },
+            "type": "footer-social",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "socialTitle",
+                    "label": {
+                        "en": "Heading",
+                        "de": "Überschrift",
+                        "es": "Encabezado",
+                        "fr": "Rubrique",
+                        "pt-PT": "Título"
+                    },
+                    "default": {
+                        "en": "Connect with us",
+                        "de": "Setzen Sie sich mit uns in Verbindung",
+                        "es": "Conéctate con nosotros",
+                        "fr": "Connectez-vous avec nous",
+                        "pt-PT": "Ligue-se a nós"
+                    }
+                },
+                {
+                    "type": "paragraph",
+                    "content": {
+                        "en": "Social links can be managed in General settings.",
+                        "de": "Links zu sozialen Medien können in den allgemeinen Einstellungen verwaltet werden.",
+                        "es": "Los enlaces sociales se pueden gestionar en ajustes generales.",
+                        "fr": "Les liens sociaux peuvent être gérés dans les paramètres généraux.",
+                        "pt-PT": "As ligações sociais podem ser geridas nas definições gerais"
+                    }
+                }
+            ]
+        },
+        {
+            "name": {
+                "en": "Text",
+                "de": "Text",
+                "es": "Texto",
+                "fr": "Texte",
+                "pt-PT": "Texto"
+            },
+            "type": "footer-text",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": {
+                        "en": "Text heading",
+                        "de": "Textüberschrift",
+                        "es": "Título del texto",
+                        "fr": "Titre du texte",
+                        "pt-PT": "Título do texto"
+                    }
+                },
+                {
+                    "type": "richtext",
+                    "id": "text",
+                    "label": {
+                        "en": "Text content",
+                        "de": "Textinhalt",
+                        "es": "Contenido del texto",
+                        "fr": "Contenu du texte",
+                        "pt-PT": "Conteúdo do texto"
+                    }
+                }
+            ]
+        }
+    ],
+    "default": {
+      "blocks": [
+        {
+          "type": "footer-menu"
+        },
+        {
+          "type": "footer-social"
+        },
+        {
+          "type": "footer-contact"
+        },
+        {
+          "type": "mailing-list"
         }
       ]
     }
-  ],
-  "settings": [
-    {
-      "type": "select",
-      "id": "color_scheme",
-      "options": [
-        {
-          "value": "accent-1",
-          "label": "t:sections.footer.settings.color_scheme.options__1.label"
-        },
-        {
-          "value": "accent-2",
-          "label": "t:sections.footer.settings.color_scheme.options__2.label"
-        },
-        {
-          "value": "background-1",
-          "label": "t:sections.footer.settings.color_scheme.options__3.label"
-        },
-        {
-          "value": "background-2",
-          "label": "t:sections.footer.settings.color_scheme.options__4.label"
-        },
-        {
-          "value": "inverse",
-          "label": "t:sections.footer.settings.color_scheme.options__5.label"
-        }
-      ],
-      "default": "background-1",
-      "label": "t:sections.footer.settings.color_scheme.label"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.footer.settings.header__1.content",
-      "info": "t:sections.footer.settings.header__1.info"
-    },
-    {
-      "type": "checkbox",
-      "id": "newsletter_enable",
-      "default": true,
-      "label": "t:sections.footer.settings.newsletter_enable.label"
-    },
-    {
-      "type": "text",
-      "id": "newsletter_heading",
-      "default": "Subscribe to our emails",
-      "label": "t:sections.footer.settings.newsletter_heading.label"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.footer.settings.header__2.content",
-      "info": "t:sections.footer.settings.header__2.info"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_social",
-      "default": false,
-      "label": "t:sections.footer.settings.show_social.label"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.footer.settings.header__3.content",
-      "info": "t:sections.footer.settings.header__4.info"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_country_selector",
-      "default": true,
-      "label": "t:sections.footer.settings.enable_country_selector.label"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.footer.settings.header__5.content",
-      "info": "t:sections.footer.settings.header__6.info"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_language_selector",
-      "default": true,
-      "label": "t:sections.footer.settings.enable_language_selector.label"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.footer.settings.header__7.content"
-    },
-    {
-      "type": "checkbox",
-      "id": "payment_enable",
-      "default": true,
-      "label": "t:sections.footer.settings.payment_enable.label"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.all.spacing"
-    },
-    {
-      "type": "range",
-      "id": "margin_top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.footer.settings.margin_top.label",
-      "default": 0
-    },
-    {
-      "type": "header",
-      "content": "t:sections.all.padding.section_padding_heading"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_top",
-      "default": 36
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_bottom",
-      "default": 36
-    }
-  ],
-  "default": {
-    "blocks": [
-      {
-        "type": "link_list"
-      },
-      {
-        "type": "text"
-      }
-    ]
-  }
 }
 {% endschema %}

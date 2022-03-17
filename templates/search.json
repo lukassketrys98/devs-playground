@@ -1,7 +1,8 @@
 {
+  "wrapper": "div.collection-wrapper",
   "sections": {
     "main": {
-      "type": "main-search",
+      "type": "template--search",
       "settings": {}
     }
   },

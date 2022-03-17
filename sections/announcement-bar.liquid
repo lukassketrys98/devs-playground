@@ -1,82 +1,141 @@
-{%- for block in section.blocks -%}
-  {%- case block.type -%}
-    {%- when 'announcement' -%}
-      <div class="announcement-bar color-{{ block.settings.color_scheme }} gradient" role="region" aria-label="{{ 'sections.header.announcement' | t }}" {{ block.shopify_attributes }}>
-        {%- if block.settings.text != blank -%}
-          {%- if block.settings.link != blank -%}
-            <a href="{{ block.settings.link }}" class="announcement-bar__link link link--text focus-inset animate-arrow">
-          {%- endif -%}
-              <p class="announcement-bar__message h5">
-                {{ block.settings.text | escape }}
-                {%- if block.settings.link != blank -%}
-                  {% render 'icon-arrow' %}
-                {%- endif -%}
-              </p>
-          {%- if block.settings.link != blank -%}
-            </a>
-          {%- endif -%}
-        {%- endif -%}
-      </div>
-  {%- endcase -%}
-{%- endfor -%}
+{{ 'section-announcement-bar.min.css' | asset_url | stylesheet_tag }}
+
+{% if section.settings.enable_announcement_bar %}
+
+  <style>
+
+    .notification-bar{
+      background-color: {{ section.settings.notification-bar--background-colour }};
+      color: {{ section.settings.notification-bar--text-colour }};
+	   font-size: {{ section.settings.fontSize }}px;
+	   letter-spacing: {{ section.settings.letterSpacing }}px;
+    }
+
+    .notification-bar a, .notification-bar .social-sharing.is-clean a{
+      color: {{ section.settings.notification-bar--text-colour }};
+    }
+
+  </style>
+
+    <div class="notification-bar">
+
+    {% if section.settings.message_text != blank %}
+    <div class="notification-bar__message">
+        {{ section.settings.message_text }}
+    </div>
+    {% endif %}
+
+    </div>
+{% endif %}
 
 {% schema %}
 {
-  "name": "t:sections.announcement-bar.name",
-  "max_blocks": 12,
-  "blocks": [
-    {
-      "type": "announcement",
-      "name": "t:sections.announcement-bar.blocks.announcement.name",
-      "settings": [
+    "name": {
+        "en": "Announcement bar",
+        "de": "Ankündigungsleiste",
+        "es": "Barra de anuncios",
+        "fr": "Barre d'annonce",
+        "pt-PT": "Barra de anúncio"
+    },
+    "settings": [
         {
-          "type": "text",
-          "id": "text",
-          "default": "Welcome to our store",
-          "label": "t:sections.announcement-bar.blocks.announcement.settings.text.label"
+            "type": "checkbox",
+            "id": "enable_announcement_bar",
+            "label": {
+                "en": "Show announcement bar",
+                "de": "Aktivieren",
+                "es": "Habilitar",
+                "fr": "Activer",
+                "pt-PT": "Ativar efeito de paralaxe"
+            },
+            "default": true
         },
         {
-          "type": "select",
-          "id": "color_scheme",
-          "options": [
-            {
-              "value": "background-1",
-              "label": "t:sections.announcement-bar.blocks.announcement.settings.color_scheme.options__1.label"
+            "type": "richtext",
+            "id": "message_text",
+            "label": {
+                "en": "Text",
+                "de": "Ankündigungstext",
+                "es": "Texto del anuncio",
+                "fr": "Texte de l'annonce",
+                "pt-PT": "Texto do anúncio"
             },
-            {
-              "value": "background-2",
-              "label": "t:sections.announcement-bar.blocks.announcement.settings.color_scheme.options__2.label"
-            },
-            {
-              "value": "inverse",
-              "label": "t:sections.announcement-bar.blocks.announcement.settings.color_scheme.options__3.label"
-            },
-            {
-              "value": "accent-1",
-              "label": "t:sections.announcement-bar.blocks.announcement.settings.color_scheme.options__4.label"
-            },
-            {
-              "value": "accent-2",
-              "label": "t:sections.announcement-bar.blocks.announcement.settings.color_scheme.options__5.label"
+            "default": {
+                "en": "<p>ANNOUNCE SOMETHING HERE</p>",
+                "de": "<p>KÜNDIGEN SIE HIER ETWAS AN</p>",
+                "es": "<p>ANUNCIE ALGO AQUÍ</p>",
+                "fr": "<p>ANNONCEZ QUELQUE CHOSE ICI</p>",
+                "pt-PT": "<p>ANUNCIE ALGO AQUI</p>"
             }
-          ],
-          "default": "accent-1",
-          "label": "t:sections.announcement-bar.blocks.announcement.settings.color_scheme.label"
+        },
+		{
+			"type": "range",
+			"id": "fontSize",
+			"min": 10,
+			"max": 30,
+			"step": 1,
+			"unit": {
+					"en": "px",
+					"de": "px",
+					"es": "px",
+					"fr": "px",
+					"pt-PT": "px"
+			},
+			"label": {
+					"en": "Size",
+					"fr": "Taille",
+					"de": "Größe",
+					"es": "Tamaño",
+					"pt-PT": "Tamanho"
+			},
+			"default": 14
+		},
+		{
+			"type": "range",
+			"id": "letterSpacing",
+			"min": 0,
+			"max": 5,
+			"step": 1,
+			"unit": {
+					"en": "px",
+					"de": "px",
+					"es": "px",
+					"fr": "px",
+					"pt-PT": "px"
+			},
+			"label": {
+					"en": "Letter spacing",
+					"de": "Zeichenabstand",
+					"es": "Espaciado entre letras",
+					"fr": "Espacement des lettres",
+					"pt-PT": "Espaçamento entre letras"
+			},
+			"default": 3
+		},
+        {
+            "type": "color",
+            "id": "notification-bar--background-colour",
+            "label": {
+                "en": "Background",
+                "de": "Ankündigungshintergrund",
+                "es": "Fondo del anuncio",
+                "fr": "Contexte de l'annonce",
+                "pt-PT": "Fundo do anúncio"
+            },
+            "default": "#242424"
         },
         {
-          "type": "url",
-          "id": "link",
-          "label": "t:sections.announcement-bar.blocks.announcement.settings.link.label"
+            "type": "color",
+            "id": "notification-bar--text-colour",
+            "label": {
+                "en": "Text",
+                "de": "Ankündigungstext",
+                "es": "Texto del anuncio",
+                "fr": "Texte de l'annonce",
+                "pt-PT": "Texto do anúncio"
+            },
+            "default": "#FFFFFF"
         }
-      ]
-    }
-  ],
-  "default": {
-    "blocks": [
-      {
-        "type": "announcement"
-      }
     ]
-  }
 }
 {% endschema %}
