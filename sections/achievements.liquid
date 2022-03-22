@@ -1,0 +1,144 @@
+{%-liquid 
+    assign heading_column_side = section.settings.heading_side
+    assign heading = section.settings.heading
+    assign column_blocks_counter = 0
+
+    for block in section.blocks 
+        if block.type == "column"
+            assign column_blocks_counter = column_blocks_counter | plus : 1 
+        endif
+    endfor
+
+-%}
+
+<div class="container">
+  <div class="achievements__wrapper {% if heading_column_side == "right" %}achievements__wrapper--revert{% endif %}">
+    <div class="achievements__column achievements__column--heading">
+      <h6 class="section__heading">{{ heading }}</h6>
+    </div>
+    <div class="achievements__column achievements__column--content">
+      <div class="achievements__container">
+        <div class="achievements__container--top">
+          {% for block in section.blocks %} 
+          {% if block.type == "paragraph" %}
+          {%-liquid 
+            assign paragraph_text = block.settings.paragraph_text
+            assign show_line = block.settings.show_line
+         -%}
+         {% if paragraph_text != blank %}
+          <div class="achievements__description"> 
+            {{ paragraph_text}}
+          </div> 
+          {% endif %}
+        {% if show_line == true %}
+            <div class="achievements__line"></div>
+            {% endif %} 
+        {% endif %}
+        {% endfor %}
+        </div>
+        
+        {% if column_blocks_counter != 0 %}
+            <div class="achievements__container--bottom">  
+            {% for block in section.blocks %} 
+            {% if block.type == "column" %}
+            {%-liquid 
+                assign stack_content = block.settings.stack_content
+                assign column_text_color = block.settings.column_text_color
+                assign column_text_1 = block.settings.column_text_1
+                assign column_text_2 = block.settings.column_text_2
+            -%}
+            <div class="achievements__block {% if stack_content == true %}achievements__block--stacked{% endif %}">
+                <div class="achievements__block_number achievements__block_content" style="color: {{ column_text_color }}">{{ column_text_1 }}</div>
+                <div class="achievements__block_text achievements__block_content"> {{ column_text_2 }}</div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Achievements",
+  "tag": "section",
+  "class": "achievements",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+    "type": "select",
+    "id": "heading_side",
+    "label": "Heading side",
+    "options": [
+      {
+        "value": "left",
+        "label": "Left"
+      },
+      {
+        "value": "right",
+        "label": "Right"
+      }
+    ]
+    }
+  ],
+  "blocks": [
+  {
+    "name": "Paragraph",
+    "type": "paragraph",
+    "settings": [
+      {
+        "type": "richtext",
+        "id": "paragraph_text",
+        "label": "Paragraph text"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_line",
+        "label": "Add a line below paragraph",
+        "default": false
+      }    
+    ]
+  },
+  {
+    "name": "Column",
+    "type": "column",
+    "settings": [
+      {
+        "type": "color",
+        "id": "column_text_color",
+        "label": "Text 1 color",
+        "default": "#000000"
+      },
+      {
+        "type": "text",
+        "id": "column_text_1",
+        "label": "Text 1"
+      },
+      {
+        "type": "text",
+        "id": "column_text_2",
+        "label": "Text 2"
+      },
+      {
+        "type": "checkbox",
+        "id": "stack_content",
+        "label": "Stack column content",
+        "default": false
+      }         
+    ]
+  }
+],
+"presets": [
+{
+  "name": "Achievements"
+}
+]
+}
+{% endschema %}
+

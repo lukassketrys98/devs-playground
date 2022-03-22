@@ -1,0 +1,18 @@
+@import '../../abstracts/variables';
+
+.section__heading {
+    font-size: 40px;
+    line-height: 48px;
+    font-family: 'KudryashevHeadlineSansW01';
+    font-style: normal;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 1px;
+    margin: 10px 20px;
+    padding: 10px;
+
+    &--gold{
+        color: $color_gold;
+    }
+
+}

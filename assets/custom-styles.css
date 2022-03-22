@@ -5,3 +5,134 @@ Please add any custom CSS code in here, it will be easier to transfer if updatin
 We highly recommend labelling changes, or App installs, so these can also be updated or removed as needed.
 
 */
+.section__heading {
+  font-size: 40px;
+  line-height: 48px;
+  font-family: "KudryashevHeadlineSansW01";
+  font-style: normal;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 1px;
+  margin: 10px 20px;
+  padding: 10px;
+}
+.section__heading--gold {
+  color: #C1A050;
+}
+
+/*
+
+ACHIEVEMENTS SECTION
+
+*/
+@media (max-width: 767.98px) {
+  .achievements__container--bottom {
+    flex-wrap: wrap;
+  }
+
+  .achievements__column--heading {
+    justify-content: center;
+  }
+}
+.achievements__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 4rem;
+  color: #1A1A1A;
+}
+.achievements__wrapper--revert {
+  flex-direction: row-reverse;
+}
+.achievements__column {
+  flex: 1;
+}
+@media (max-width: 767.98px) {
+  .achievements__column {
+    flex: unset;
+  }
+}
+.achievements__column--heading {
+  display: flex;
+}
+@media (min-width: 768px) {
+  .achievements__column--heading {
+    width: 100%;
+    justify-content: flex-start;
+    margin: 0 20px;
+    padding: 10px;
+  }
+}
+@media (max-width: 767.98px) {
+  .achievements__column--heading {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+.achievements__column--content {
+  padding-left: 30px;
+  display: flex;
+  align-items: center;
+}
+@media (max-width: 767.98px) {
+  .achievements__column--content {
+    padding-left: 0;
+  }
+}
+.achievements__container {
+  display: flex;
+  flex-direction: column;
+}
+.achievements__container--bottom {
+  display: flex;
+}
+.achievements__description {
+  margin: 10px 20px;
+  padding: 10px;
+  font-size: 18px;
+  text-align: left;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 500;
+}
+.achievements__line {
+  height: 1px;
+  margin: 10px 30px;
+  background: linear-gradient(90deg, #774927 3.03%, #D2A34A 21.42%, #E9BC80 58.19%, #C8862E 94.96%);
+}
+.achievements__block {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  padding: 30px;
+}
+@media (max-width: 575.98px) {
+  .achievements__block {
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 15px 40px;
+  }
+}
+.achievements__block--stacked {
+  flex-direction: column;
+}
+.achievements__block_number {
+  color: #1A1A1A;
+  font-size: 70px;
+  line-height: 58px;
+  font-family: "Tenor Sans", serif;
+}
+.achievements__block_text {
+  padding: 10px;
+  font-size: 14px;
+  font-family: "Josefin Sans", sans-serif;
+}
+.achievements__block_content {
+  min-height: 50px;
+}
+
+.container {
+  max-width: 1480px;
+  padding: 0 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+}
