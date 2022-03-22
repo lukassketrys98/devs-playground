@@ -1,0 +1,133 @@
+/*
+
+ACHIEVEMENTS SECTION
+
+*/
+
+@include media-breakpoint-down(md) {
+    .achievements__container--bottom {
+        flex-wrap: wrap;
+    }
+    .achievements__column--heading {
+        justify-content: center;
+    }
+    
+}
+
+
+.achievements {
+    &__wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 4rem;
+        color: #1A1A1A;
+    
+        &--revert {
+            flex-direction: row-reverse;  
+        }
+        
+    }
+    &__column {
+        flex: 1;
+
+        @include media-breakpoint-down(md) {
+            flex: unset;
+        }
+
+        &--heading {
+            display: flex;
+           
+            @include media-breakpoint-up(md) {
+                width: 100%;
+                justify-content: flex-start;
+                margin: 0 20px;
+                padding: 10px;
+            }
+
+            @include media-breakpoint-down(md) {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            
+
+        }
+        
+        &--content {
+            padding-left: 30px;
+            display: flex;
+            align-items: center;
+
+            @include media-breakpoint-down(md) {
+                padding-left: 0;
+            }
+        }
+
+    }
+    &__container {
+        display: flex;
+        flex-direction: column;
+
+        &--bottom {
+            display: flex;
+        }
+    }
+    
+    &__description {
+        margin: 10px 20px;
+        padding: 10px;
+        font-size: 18px;
+        text-align: left;
+        font-family: 'Josefin Sans', sans-serif;
+        font-weight: 500;
+    }
+    
+    &__line {
+        height: 1px;
+        margin: 10px 30px;
+        background: linear-gradient(90deg, #774927 3.03%, #D2A34A 21.42%, #E9BC80 58.19%, #C8862E 94.96%);
+    }
+    
+    &__block {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        padding: 30px;
+
+        @include media-breakpoint-down(sm) {
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 15px 40px;
+        }
+    
+        &--stacked {
+            flex-direction: column;
+        }
+    
+        &_number {
+            color: #1A1A1A;
+            font-size: 70px;
+            line-height: 58px;
+            font-family: 'Tenor Sans', serif;
+        }
+        
+        &_text {
+            padding: 10px;
+            font-size: 14px;
+            font-family: 'Josefin Sans', sans-serif;
+            
+        }
+        
+        &_content {
+            min-height: 50px;
+        }
+
+    }
+}
+
+
+
+
+
+
+
