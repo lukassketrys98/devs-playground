@@ -23,5 +23,9 @@
 		@media (min-width: $grid_breakpoint_lg_start) and (max-width: $grid_breakpoint_xl_end) {
 			@content;
 		}
+	} @else if ($point1 == md) and ($point2 == lg) {
+		@media (min-width: $grid_breakpoint_md_start) and (max-width: $grid_breakpoint_lg_end) {
+			@content;
+		}
 	}
 }
