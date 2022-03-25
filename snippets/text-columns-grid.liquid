@@ -1,0 +1,146 @@
+{% assign columnsPerRow = 3 %}
+{% assign block_count = section.blocks.size %}
+{% assign show_bow_lines = section.settings.show_bow_lines %}
+
+
+<div class="text-columns__content container">
+        {%-liquid 
+          assign heading = section.settings.heading
+          assign show_background = section.settings.show_background
+       -%}
+        {% if heading != blank %}
+        <div class="text-columns-content__heading section__heading {% if show_background %}text-columns-content__heading--white{% endif %}">
+            {{ heading }}
+        </div>
+        {% endif %}
+
+        {% if block_count < 4 %}
+        <div class="text-columns-content__blocks grid">
+            {% for block in section.blocks %}
+            <div class="text-columns-content__block grid-item-33">
+                {%-liquid 
+                  assign paragraph = block.settings.paragraph
+                  assign column_heading = block.settings.column_heading
+                  assign subheading = block.settings.subheading
+               -%}
+            
+               {% if forloop.first and show_bow_lines %}
+                {% render 'bow-arrows', direction: 'bottom' %}
+               {% endif %}
+                <div class="text-columns-content-block__paragraph {% if show_background %}text-columns-content-block__paragraph--white{% endif %}">
+                    {{ paragraph }}
+                </div>
+                {% if column_heading != blank %}
+                <div class="text-columns-content-block__heading {% if show_background %}text-columns-content-block__heading--white{% endif %}">
+                    {{ column_heading }}
+                </div>
+                {% endif%}
+                {% if subheading != blank %}
+                  <div class="text-columns-content-block__subheading {% if show_background %}text-columns-content-block__subheading--white{% endif %}">
+                      {{ subheading }}
+                  </div>
+                {% endif%} 
+                
+                  {% if show_bow_lines %}
+                    {% if forloop.first %}
+                        {% render 'bow-arrows', direction: 'left' %}
+                    {% elsif forloop.index == 2 %}
+                        {% render 'bow-arrows', direction: 'right' %}
+                        {% render 'bow-arrows', direction: 'top' %}
+                    {% endif %}
+                  {% endif%}
+               
+            </div>
+            {% endfor %}
+        </div>
+
+        {% else %}
+
+        <div class="featured-products-outer" data-featured-products-outer>
+        
+            {% assign image_custom_sizes = true %}
+            {% assign image_xs_width = '280x' %}
+            {% assign image_s_width = '310x' %}
+            {% assign image_m_width = '340x' %}
+            {% assign image_l_width = '380x' %}
+            {% assign image_default_width = '410x' %}
+            {% assign image_noscript_width = '220x' %}
+            {% assign delayAmount = 0 %}
+        
+            {%- assign collection = collections[section.settings.collection] -%}
+        
+            <noscript>
+              <h2 class="featured-products-heading active">{{ collection.title | escape }}</h2>
+            </noscript>
+        
+            <div class="grid featured-products swiper-container" {% render 'animations', type: 'fadeUpAnim1' %}>
+              <div class="grid featured-products-inner swiper-wrapper" data-featured-products data-products="{{ columnsPerRow }}">
+                {% for block in section.blocks %}
+                <div class="text-columns-content__block grid-item-33">
+                    {%-liquid 
+                      assign paragraph = block.settings.paragraph
+                      assign column_heading = block.settings.column_heading
+                      assign subheading = block.settings.subheading
+                   -%}
+                   {% if forloop.first %}
+                    {% render 'bow-arrows', direction: 'bottom' %}
+                   {% endif %}
+                    <div class="text-columns-content-block__paragraph {% if show_background %}text-columns-content-block__paragraph--white{% endif %}">
+                        {{ paragraph }}
+                    </div>
+                    {% if column_heading != blank %}
+                    <div class="text-columns-content-block__heading {% if show_background %}text-columns-content-block__heading--white{% endif %}">
+                        {{ column_heading }}
+                    </div>
+                    {% endif%}
+                    {% if subheading != blank %}
+                    <div class="text-columns-content-block__subheading {% if show_background %}text-columns-content-block__subheading--white{% endif %}">
+                        {{ subheading }}
+                    </div>
+                    {% if forloop.first %}
+                        {% render 'bow-arrows', direction: 'left' %}
+                    {% elsif forloop.index == 2 %}
+                        {% render 'bow-arrows', direction: 'right' %}
+                        {% render 'bow-arrows', direction: 'top' %}
+                    {% endif %}
+                    {% endif%}
+                </div>
+                {% endfor %}
+
+                <!-- {% assign itemCount = 0 %}
+                {% for i in (1..10) %}
+                  {% assign itemCount = itemCount | plus: 1 %}
+                  {% capture delayAmount %}{% cycle '100', '200', '300', '400', '500', '600', '700', '800' %}{% endcapture %}
+        
+                  <article class="grid-item-20 swiper-slide"
+                    data-aos-duration="600"
+                    data-aos-delay="{{ delayAmount }}"
+                    data-aos="fade-up"
+                    data-aos-easing="capital-easing">
+                      <div class="svg-placeholder">
+                        {% capture placeholder %}product-{% cycle '1', '2', '3', '4', '5', '6' %}{% endcapture %}
+                        {{ placeholder | placeholder_svg_tag }}
+                      </div>
+                      <div class="item-content {{ section.settings.product-info }}">
+                        <h3 class="item-title product-homepage-slider--onboarding-title">{{ 'layout.onboarding.product_title' | t }}</h3>
+                        <span class="item-price">
+                          <span class="money">{{ 10000 | money }}</span>
+                        </span>
+                      </div>
+                  </article>
+                {% endfor %} -->
+
+              </div>
+              <div class="swiper-button-prev">
+                {% render 'icon-arrow' %}
+              </div>
+              <div class="swiper-button-next">
+                {% render 'icon-arrow' %}
+              </div>
+              <div class="swiper-scrollbar"></div>
+            </div>
+        </div>
+
+        {% endif %}
+
+</div>

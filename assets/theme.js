@@ -6327,9 +6327,9 @@ var Theme = (function () {
               break;
             case 'featured-products':
               this.Home.initCollectionSlider();
-              if (this.hasProductItems) {
-                new _snippetsProductItem2['default']('[data-product-item-wrapper]');
-              }
+              // if (this.hasProductItems) {
+              //   new _snippetsProductItem2['default']('[data-product-item-wrapper]');
+              // }
               break;
             case 'slideshow':
               this.Home.initSlideshow(sectionId);

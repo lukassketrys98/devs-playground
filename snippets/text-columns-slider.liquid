@@ -1,0 +1,37 @@
+{% assign columnsPerRow = 3 %}
+
+<div class="featured-products-outer" data-featured-products-outer>
+
+    {% assign image_custom_sizes = true %}
+    {% assign image_xs_width = '280x' %}
+    {% assign image_s_width = '310x' %}
+    {% assign image_m_width = '340x' %}
+    {% assign image_l_width = '380x' %}
+    {% assign image_default_width = '410x' %}
+    {% assign image_noscript_width = '220x' %}
+    {% assign delayAmount = 0 %}
+
+    {%- assign collection = collections[section.settings.collection] -%}
+
+    <noscript>
+      <h2 class="featured-products-heading active">{{ collection.title | escape }}</h2>
+    </noscript>
+
+    <div class="grid featured-products swiper-container" {% render 'animations', type: 'fadeUpAnim1' %}>
+      <div class="grid featured-products-inner swiper-wrapper" data-featured-products data-products="{{ section.settings.columnsPerRow }}">
+        {% for item in collection.products limit: 14 %}
+        {% assign delayAmount = delayAmount | plus: 100 %}
+          {% render 'product-item', item: item, grid: 'grid-item-20 swiper-slide', columnsPerRow: columnsPerRow, image_default_width: '1024x', additionalInfo: true, productInfoSetting: section.settings.product-info, isSearch: false, delayAmount: delayAmount %}
+        {% endfor %}
+      </div>
+      <div class="swiper-button-prev">
+        {% render 'icon-arrow' %}
+      </div>
+      <div class="swiper-button-next">
+        {% render 'icon-arrow' %}
+      </div>
+      <div class="swiper-scrollbar"></div>
+    </div>
+
+
+</div>
