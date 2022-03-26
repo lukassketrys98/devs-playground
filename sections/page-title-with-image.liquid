@@ -1,0 +1,116 @@
+{%-liquid 
+    assign heading = section.settings.heading
+    assign show_background = section.settings.show_background
+    assign heading_alignment = section.settings.heading_alignment
+ -%}
+
+<section 
+data-section-id="{{ section.id }}" 
+class="page-title__wrapper homepage-content--{{ section.id }}"
+
+	{% render 'animations', type: 'fadeUpAnim1' %}
+>
+    <style>
+        {% if section.settings.background_image != blank %}
+            .homepage-content--{{ section.id }} .img {
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+        {% endif %}
+    </style>
+
+<div class="page-title">
+  {% capture image_layout %}
+    <div class="page-title__image">
+        {% if section.settings.background_image != blank %}
+        {%
+                  render 'image-bg',
+                  image_class: 'img',
+                  image: section.settings.background_image,
+                  image_default: false,
+                  image_sizes: false,
+                  image_additional_content: false,
+                  image_dimension: false,
+                  image_link: false
+                %}
+        {% else %}
+            <span class="svg-placeholder">{{ 'lifestyle-1' | placeholder_svg_tag }}</span>
+        {% endif %}
+    </div>
+  {% endcapture %}
+
+  {% if section.settings.show_background %}
+    {{ image_layout }}
+  {% endif %}
+
+<div class="page-title__content container">
+    {% if heading != blank %}
+    <div class="page-title-content__heading section__heading 
+    {% if show_background %}page-title-content__heading--white{% endif %}
+    {% if heading_alignment == "left" %}page-title-content__heading--left{% endif %}
+    {% if heading_alignment == "right" %}page-title-content__heading--right{% endif %}">
+        {{ heading }}
+    </div>
+    {% endif %}
+</div>
+    
+</div>
+
+
+</section>
+
+{% schema %}
+{
+  "name": "Page Title With Image",
+  "tag": "section",
+  "class": "page-title",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+        "type": "select",
+        "id": "heading_alignment",
+        "label": "Heading alignment",
+        "options": [
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "center"
+    },
+    {
+        "type": "header",
+        "content": "Background image settings"
+    },
+    {
+        "type": "checkbox",
+        "id": "show_background",
+        "label": "Show background image",
+        "default": false
+    },
+    {
+        "type": "image_picker",
+        "id": "background_image",
+        "label": "Background image"
+    }   
+  ],
+"presets": [
+    {
+    "name": "Page Title With Image"
+    }
+  ]
+}
+{% endschema %}
