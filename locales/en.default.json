@@ -63,7 +63,8 @@
     },
     "article": {
       "newer": "Newer",
-      "older": "Older"
+      "older": "Older",
+      "updated_at": "Updated {{updated_at}}"
     },
     "comments": {
       "title": "Comments ({{ count }})",

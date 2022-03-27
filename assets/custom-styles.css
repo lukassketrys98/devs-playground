@@ -5,6 +5,155 @@ Please add any custom CSS code in here, it will be easier to transfer if updatin
 We highly recommend labelling changes, or App installs, so these can also be updated or removed as needed.
 
 */
+.article__page__share {
+  display: flex;
+  justify-content: space-between;
+}
+@media (min-width: 768px) {
+  .article__page__share {
+    align-items: center;
+  }
+}
+.article__page__share__buttons a {
+  margin-right: 15px;
+}
+@media (max-width: 767.98px) {
+  .article__page__share__buttons {
+    margin-top: 25px;
+  }
+}
+@media (max-width: 767.98px) {
+  .article__page__share {
+    flex-direction: column-reverse;
+  }
+}
+.article__page__share svg {
+  color: transparent;
+}
+.article__page__share svg :hover {
+  color: #c1a050;
+}
+
+.article__page__image {
+  width: 100%;
+}
+.article__page__content {
+  margin-top: 180px;
+  margin-bottom: 70px;
+  display: flex;
+  flex-direction: column;
+}
+.article__page__content img {
+  width: 100%;
+}
+.article__page__content h1, .article__page__content h2, .article__page__content h3, .article__page__content h4, .article__page__content h5, .article__page__content h6 {
+  font-family: "KudryashevHeadlineSansW01";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 40px;
+  color: #C1A050;
+  text-transform: none;
+  letter-spacing: 0px;
+}
+.article__page p {
+  font-family: "Josefin Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+  color: #1A1A1A;
+}
+.article__page__author {
+  display: flex;
+  border-top: 1px solid #E7E7E7;
+  padding-top: 15px;
+  margin-top: 30px;
+}
+@media (max-width: 767.98px) {
+  .article__page__author {
+    text-align: center;
+    flex-direction: column;
+  }
+  .article__page__author img {
+    margin-right: unset !important;
+  }
+}
+.article__page__author__image img {
+  margin-right: 50px;
+  width: 140px;
+  border-radius: 100%;
+  vertical-align: middle;
+}
+.article__page__author__text__name {
+  margin-bottom: 15px;
+}
+.article__page__author__text__name p {
+  font-family: "Josefin Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+  color: #808184;
+}
+.article__page__author__text__name h1, .article__page__author__text__name h2, .article__page__author__text__name h3, .article__page__author__text__name h4, .article__page__author__text__name h5, .article__page__author__text__name h6 {
+  font-family: "Tenor Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
+  color: #C1A050;
+  text-transform: none;
+  letter-spacing: 0px;
+}
+
+.article-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  .article-cards .article__card {
+    max-width: 48%;
+    min-width: 420px;
+  }
+}
+
+.article-cards-section--heading {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 70px;
+}
+.article-cards-section--text {
+  margin: 10px !important;
+  font-family: "KudryashevHeadlineSansW01";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 37px;
+  display: flex;
+  align-items: center;
+  color: #212121 !important;
+}
+.article-cards-section--button {
+  display: flex;
+  align-items: center;
+}
+.article-cards-section--button-text {
+  padding: 10px;
+  font-family: "Tenor Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 32px;
+  color: #1A1A1A !important;
+  display: flex;
+  align-items: center;
+}
+.article-cards-section--button-arrow {
+  padding: 10px;
+}
+
 /*
 
 blog page article cards
@@ -14,7 +163,8 @@ blog page article cards
   display: flex;
   flex-wrap: wrap;
 }
-.blog-wrapper .article__card {
+
+.article__card {
   display: flex;
   flex-direction: column-reverse;
   margin: 10px;
@@ -24,22 +174,22 @@ blog page article cards
   border-radius: 6px;
 }
 @media (min-width: 768px) {
-  .blog-wrapper .article__card {
+  .article__card {
     max-width: 390px;
   }
 }
 @media (min-width: 768px) and (max-width: 1199.98px) {
-  .blog-wrapper .article__card {
+  .article__card {
     max-width: 48%;
     min-width: 320px;
   }
 }
 @media (max-width: 767.98px) {
-  .blog-wrapper .article__card {
+  .article__card {
     flex: unset;
   }
 }
-.blog-wrapper .article__card--wide {
+.article__card--wide {
   display: flex;
   flex-direction: row;
   margin: 50px 10px;
@@ -49,55 +199,55 @@ blog page article cards
   border-radius: 6px;
 }
 @media (max-width: 767.98px) {
-  .blog-wrapper .article__card--wide {
+  .article__card--wide {
     flex-direction: column-reverse;
   }
 }
-.blog-wrapper .article__card--wide .article__card__content {
+.article__card--wide .article__card__content {
   padding: 60px 80px;
 }
 @media (max-width: 1199.98px) {
-  .blog-wrapper .article__card--wide .article__card__content {
+  .article__card--wide .article__card__content {
     flex: 2;
   }
 }
 @media (max-width: 767.98px) {
-  .blog-wrapper .article__card--wide .article__card__content {
+  .article__card--wide .article__card__content {
     padding: 40px 30px;
   }
 }
 @media (max-width: 991.98px) {
-  .blog-wrapper .article__card--wide .article__card__image {
+  .article__card--wide .article__card__image {
     flex: 3;
   }
 }
-.blog-wrapper .article__card__content {
+.article__card__content {
   flex: 3;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 40px 30px;
 }
-.blog-wrapper .article__card__content--extra-padding {
+.article__card__content--extra-padding {
   padding: 150px 60px !important;
 }
-.blog-wrapper .article__card__content--extra-padding .article__card__bottom {
+.article__card__content--extra-padding .article__card__bottom {
   margin-top: 150px;
 }
 @media (max-width: 767.98px) {
-  .blog-wrapper .article__card__content--extra-padding .article__card__bottom {
+  .article__card__content--extra-padding .article__card__bottom {
     margin-top: 20px;
   }
 }
 @media (max-width: 767.98px) {
-  .blog-wrapper .article__card__content--extra-padding {
+  .article__card__content--extra-padding {
     padding: 40px 30px !important;
   }
 }
-.blog-wrapper .article__card__image {
+.article__card__image {
   flex: 3;
 }
-.blog-wrapper .article__card__excerpt p {
+.article__card__excerpt p {
   font-family: "Josefin Sans";
   font-style: normal;
   font-weight: 500;
@@ -105,7 +255,7 @@ blog page article cards
   line-height: 28px;
   color: #808184;
 }
-.blog-wrapper .article__card__read__button a {
+.article__card__read__button a {
   font-family: "Josefin Sans", sans-serif;
   font-style: normal;
   font-weight: 700;
@@ -113,7 +263,7 @@ blog page article cards
   line-height: 23px;
   color: #1A1A1A;
 }
-.blog-wrapper .article__card__time {
+.article__card__time {
   font-family: "Josefin Sans", sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -121,26 +271,38 @@ blog page article cards
   line-height: 26px;
   color: #808184;
 }
-.blog-wrapper .article__card__title a {
+.article__card__title {
+  text-transform: none;
+}
+.article__card__title a {
   font-family: "KudryashevHeadlineSansW01";
   font-style: normal;
   font-weight: 400;
   font-size: 28px;
   line-height: 40px;
   color: #1A1A1A !important;
+  letter-spacing: 0px;
 }
-.blog-wrapper .article__card__bottom {
+.article__card__bottom {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
 }
-.blog-wrapper .blog__item__image {
+
+.blog__item__image {
   height: 100%;
 }
-.blog-wrapper .blog__item__image .height-inherit {
+.blog__item__image .height-inherit {
   height: 100%;
 }
-.blog-wrapper .blog__item__image .height-inherit img {
+.blog__item__image .height-inherit img {
   height: 100%;
   object-fit: cover;
+}
+
+.container {
+  max-width: 1480px;
+  padding: 0 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
 }
