@@ -5,7 +5,7 @@
 
       {% if settings.shareFacebook %}
         <a target="_blank" rel="nofollow" href="//www.facebook.com/sharer.php?u={{ fullURL }}" class="share-facebook" title="Facebook">
-          <svg><use xlink:href="#social-facebook"></use></svg>
+          {% render 'icon-facebook'%}
         </a>
       {% endif %}
 

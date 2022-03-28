@@ -1,0 +1,21 @@
+.black__button__wide{
+    &--text{
+    font-family: 'Tenor Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 32px;
+    color: #E7E7E7;
+    padding: 15px;  
+    }
+
+    background: #1A1A1A;
+    border-radius: 12px;
+    width: 100%;
+    text-align: center;
+    margin: 12px;
+
+    @include media-breakpoint-up(md){
+        visibility: collapse;
+    }
+}

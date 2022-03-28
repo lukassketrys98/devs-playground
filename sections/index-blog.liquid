@@ -22,16 +22,22 @@
       {% if hasSubheading %}
         <h3 class="index-subheading">{{ section.settings.indexBlogSubheading | escape }}</h3>
       {% endif %}
+      <div class="index__heading">
         {% if hasHeading %}
-        <h2>{{ section.settings.indexBlogHeading | escape }}</h2>
-      {% endif %}
+          <h2 class="index__heading--text">{{ section.settings.indexBlogHeading | escape }}</h2>
+        {% endif %}
+        <div class="index__heading__more">
+          <a class="index__heading__more--text" href="{{section.settings.blog_link}}">View all <div class="index__heading__more--arrow">{% render 'icon-arrow-long' %}</div></a>
+        </div>
+      </div>
+
       {% if hasText %}
         <div class="homepage-subheader rte">{{ section.settings.indexBlogText }}</div>
       {% endif %}
     </header>
   {% endif %}
 
-  <div class="grid">
+  <div class="grid blog__post__image custom__scrl">
 
     {% case section.settings.post_limit %}
       {% when 2 %}
@@ -68,6 +74,7 @@
               <h3 class="index-blog-title">{{ "layout.onboarding.blog_item_title" | t }}</h3>
               <p class="index-blog-text">{{ "layout.onboarding.blog_item_text" | t }}</p>
             </div>
+
           </div>
         </article>
       {% endfor %}
@@ -138,6 +145,9 @@
                   {% endif %}
 
                   <p class="index-blog-text">{{ current_post.excerpt_or_content | strip_html | truncatewords: 30 }}</p>
+                </div>
+                <div class="read__button">
+                  <a href="{{ current_post.url }}">{{ "blogs.blog.read_more" | t }} <div class="index__heading__more--arrow">{% render 'icon-arrow-long' %}</a>
                 </div>
               </div>
             </article>
@@ -228,6 +238,9 @@
 
                   <p class="index-blog-text">{{ article.excerpt_or_content | strip_html | truncatewords: 30 }}</p>
                 </div>
+                <div class="read__button">
+                  <a href="{{ current_post.url }}">{{ "blogs.blog.read_more" | t }} <div class="index__heading__more--arrow">{% render 'icon-arrow-long' %}</a>
+                </div>
               </div>
             </article>
           {% endfor %}
@@ -259,7 +272,9 @@
         {% endunless %}
 
     {% endcase %}
-
+      <a class="black__button__wide" href="{{section.settings.blog_link}}">
+        <p class="black__button__wide--text">View all</p>
+      </a>
   </div>
 
 </section>
@@ -411,6 +426,11 @@
               "pt-PT": "Tamanho da imagem"
             },
             "default": "square"
+        },
+        {
+          "type": "url",
+          "id": "blog_link",
+          "label": "Blog link"
         }
     ],
     "blocks": [
