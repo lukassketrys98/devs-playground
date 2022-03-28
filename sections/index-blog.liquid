@@ -26,8 +26,8 @@
         {% if hasHeading %}
           <h2 class="index__heading--text">{{ section.settings.indexBlogHeading | escape }}</h2>
         {% endif %}
-        <div class="index__heading__more">
-          <a class="index__heading__more--text" href="{{section.settings.blog_link}}">View all <div class="index__heading__more--arrow">{% render 'icon-arrow-long' %}</div></a>
+        <div class="index__heading__more arrow__icon">
+          <a class="index__heading__more--text" href="{{section.settings.blog_link}}">View all <div class="index__heading__more--arrow ">{% render 'icon-arrow-long' %}</div></a>
         </div>
       </div>
 
@@ -146,7 +146,7 @@
 
                   <p class="index-blog-text">{{ current_post.excerpt_or_content | strip_html | truncatewords: 30 }}</p>
                 </div>
-                <div class="read__button">
+                <div class="read__button arrow__icon">
                   <a href="{{ current_post.url }}">{{ "blogs.blog.read_more" | t }} <div class="index__heading__more--arrow">{% render 'icon-arrow-long' %}</a>
                 </div>
               </div>
@@ -238,7 +238,7 @@
 
                   <p class="index-blog-text">{{ article.excerpt_or_content | strip_html | truncatewords: 30 }}</p>
                 </div>
-                <div class="read__button">
+                <div class="read__button arrow__icon">
                   <a href="{{ current_post.url }}">{{ "blogs.blog.read_more" | t }} <div class="index__heading__more--arrow">{% render 'icon-arrow-long' %}</a>
                 </div>
               </div>

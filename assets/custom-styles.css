@@ -169,6 +169,12 @@ We highly recommend labelling changes, or App installs, so these can also be upd
   }
 }
 
+.arrow__icon:hover svg {
+  align-self: center;
+  transform: translateX(26px);
+  transition: transform 0.35s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
 .article__page__image {
   width: 100%;
 }
