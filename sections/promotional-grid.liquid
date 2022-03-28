@@ -38,6 +38,7 @@
     <div class="departments grid" {% if isSlideshow %}data-departments-slideshow{% endif %} {% render 'animations', type: 'fadeCycle', delay: delayAmount %}>
       {% for block in section.blocks %}
 
+
         {% assign open = false %}
         {% if forloop.first %}
           {% assign open = true %}
@@ -61,11 +62,12 @@
           <div class="grid-item-{% if section.blocks.size == 1 or section.blocks.size > 4 %}100{% else %}50{% endif %}">
 
             {% capture delayAmount %}{% cycle '200', '400', '600', '800', '1000' %}{% endcapture %}
-
+            {% capture number_division_type %}{% cycle 'odd', 'even' %}{% endcapture %}
+             
             <article
               class="department-item department-item-{{ block.id }}
                 {%- if isWide %} department-item-wide{%- endif -%}
-                {% if forloop.index == 2 or forloop.index == 4 %}top-gap{% endif %}"
+                {% if number_division_type == 'even' %}spacer--top{% endif %}"
               data-block-id="{{ block.id }}"
               data-department-slide="{{ slideCount }}"
               {{ block.shopify_attributes }}

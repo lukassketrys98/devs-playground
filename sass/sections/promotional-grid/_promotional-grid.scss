@@ -4,11 +4,55 @@ PROMOTIONAL GRID SECTION
 
 */
 
+
+$promotionalGridImageHeight: 800px;
+$spacerTop: 100px;
+$sectionGutter: 100px;
+$sectionGutterSm: 30px;
+
+.departments-wrapper {
+
+    margin-top: $sectionGutter;
+    margin-bottom: $sectionGutter;
+
+    @include media-breakpoint-down(md) {
+        margin-top: $sectionGutterSm;
+        margin-bottom: $sectionGutterSm;
+    }
+}
+
 .heading-bottom-center {
     bottom: 0;
     text-align: center;
 }
 
-.top-gap {
-    top: 80px;
+.spacer--top {
+    top: $spacerTop;
+
+    @include media-breakpoint-down(md) {
+        top: unset;
+    }
+}
+
+.slick-track {
+    .spacer--top {
+        top: unset;
+    }
+}
+
+.departments-slide {
+
+    .grid-item-50 {
+        @include media-breakpoint-down(md) {
+            width: 100% !important;
+        }
+    }
+
+    .department-item {
+        .department-figure {
+            height: $promotionalGridImageHeight;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+    }
 }
