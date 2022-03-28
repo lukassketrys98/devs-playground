@@ -38,6 +38,7 @@
     <div class="departments grid" {% if isSlideshow %}data-departments-slideshow{% endif %} {% render 'animations', type: 'fadeCycle', delay: delayAmount %}>
       {% for block in section.blocks %}
 
+
         {% assign open = false %}
         {% if forloop.first %}
           {% assign open = true %}
@@ -61,10 +62,12 @@
           <div class="grid-item-{% if section.blocks.size == 1 or section.blocks.size > 4 %}100{% else %}50{% endif %}">
 
             {% capture delayAmount %}{% cycle '200', '400', '600', '800', '1000' %}{% endcapture %}
-
+            {% capture number_division_type %}{% cycle 'odd', 'even' %}{% endcapture %}
+             
             <article
               class="department-item department-item-{{ block.id }}
-                {%- if isWide %} department-item-wide{%- endif -%}"
+                {%- if isWide %} department-item-wide{%- endif -%}
+                {% if number_division_type == 'even' %}spacer--top{% endif %}"
               data-block-id="{{ block.id }}"
               data-department-slide="{{ slideCount }}"
               {{ block.shopify_attributes }}
@@ -102,7 +105,7 @@
                   {% if title or button or text %}
                     <figcaption class="{{ block.settings.textAlignment }} title-{{ block.settings.departmentTitleSize }}">
                       {% if title %}
-                        <h3>{{ block.settings.departmentTitle | escape }}</h3>
+                        <h3 class="section__heading">{{ block.settings.departmentTitle | escape }}</h3>
                       {% endif %}
                       {% if text %}
                         <div class="rte">
@@ -164,7 +167,7 @@
                   {% capture index %}{% cycle '1', '2', '3', '4', '5', '6' %}{% endcapture %}
                   {{ 'collection-' | append: index | placeholder_svg_tag }}
                   <figcaption class="{{ block.settings.textAlignment }} title-{{ block.settings.departmentTitleSize }}">
-                    <h3 {% if block.settings.departmentColor %}class="invert-color"{% endif %}>{{ block.settings.departmentTitle | escape }}</h3></figcaption>
+                    <h3 class="section__heading" {% if block.settings.departmentColor %}class="invert-color"{% endif %}>{{ block.settings.departmentTitle | escape }}</h3></figcaption>
                 </figure>
                 {{ settingsLink }}
 
@@ -384,7 +387,11 @@
                                 "fr": "En bas à droite",
                                 "pt-PT": "Canto inferior direito"
                             }
-                        }
+                        },
+                        {
+                          "value": "heading-bottom-center",
+                          "label": "Bottom center"
+                      }
                     ]
                 },
                 {

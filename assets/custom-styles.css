@@ -5,3 +5,68 @@ Please add any custom CSS code in here, it will be easier to transfer if updatin
 We highly recommend labelling changes, or App installs, so these can also be updated or removed as needed.
 
 */
+.section__heading {
+  font-size: 40px !important;
+  line-height: 48px !important;
+  font-family: "KudryashevHeadlineSansW01" !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+  letter-spacing: 1px !important;
+  margin: 10px 20px !important;
+  padding: 10px !important;
+  font-feature-settings: "salt" on, "liga" off !important;
+}
+.section__heading--gold {
+  color: #C1A050;
+}
+
+/*
+
+PROMOTIONAL GRID SECTION
+
+*/
+.departments-wrapper {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+@media (max-width: 767.98px) {
+  .departments-wrapper {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+}
+
+.heading-bottom-center {
+  bottom: 0;
+  text-align: center;
+}
+
+.spacer--top {
+  top: 100px;
+}
+@media (max-width: 767.98px) {
+  .spacer--top {
+    top: unset;
+  }
+}
+
+.slick-track .spacer--top {
+  top: unset;
+}
+
+@media (max-width: 767.98px) {
+  .departments-slide .grid-item-50 {
+    width: 100% !important;
+  }
+}
+.departments-slide .department-item .department-figure {
+  height: 800px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+@media (max-width: 991.98px) {
+  .departments-slide .department-item .department-figure {
+    height: 500px;
+  }
+}
