@@ -1,0 +1,13 @@
+/*
+
+IMAGE WITH TEXT SECTION
+
+*/
+
+
+@include media-breakpoint-down(sm) {
+    .image-with-text--content p{
+        padding-right: 0 !important;
+    }
+       
+}

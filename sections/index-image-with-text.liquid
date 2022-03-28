@@ -40,7 +40,7 @@
                 {% endif %}
 
                 {% if section.settings.heading != blank %}
-                  <h2 class="image-with-text--title">{{ section.settings.heading }}</h2>
+                  <h2 class="image-with-text--title section__heading section__heading--no-margin">{{ section.settings.heading }}</h2>
                 {% endif %}
 
               </header>
@@ -58,6 +58,10 @@
                 {% endif %}>
                 {{ section.settings.text }}
               </div>
+            {% endif %}
+
+            {% if section.settings.button__text != blank and section.settings.link != blank %}
+            <a class="button button--black" href="{% if section.settings.link != blank%}{{ section.settings.link }}{% endif %}"><span>{{ section.settings.button__text  }}</span></a>
             {% endif %}
 
           </div>
@@ -371,6 +375,45 @@
             "es": "Eliminar espacio",
             "fr": "Supprimer l'espacement",
             "pt-PT": "Remover o espaçamento"
+          }
+        },{
+          "type": "header",
+          "content": {
+            "en": "Button",
+            "de": "Button",
+            "es": "Botón",
+            "fr": "Bouton",
+            "pt-PT": "Botão"
+          }
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": {
+            "en": "Button link",
+            "de": "Buttonlink",
+            "es": "Enlace del botón",
+            "fr": "Lien du bouton",
+            "pt-PT": "Ligação do botão"
+          },
+          "default": "/collections/all"
+        },
+        {
+          "type": "text",
+          "id": "button__text",
+          "label": {
+            "en": "Button text",
+            "de": "Buttontext",
+            "es": "Texto del botón",
+            "fr": "Texte des boutons",
+            "pt-PT": "Texto do botão"
+          },
+          "default": {
+            "en": "Shop now",
+            "de": "Jetzt einkaufen",
+            "es": "Comprar ahora",
+            "fr": "Acheter maintenant",
+            "pt-PT": "Comprar agora"
           }
         }
     ],
