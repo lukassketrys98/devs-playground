@@ -1,7 +1,7 @@
 {{ 'section-image-with-text.min.css' | asset_url | stylesheet_tag }}
 
 <section class="featured-content--wrapper{% if section.settings.remove-spacing %} remove-spacing{% endif %}">
-  <div class="featured-content{% if section.settings.textAlignment == 'text-right' %} featured-content--text-right{% elsif section.settings.textAlignment == 'text-center' %} featured-content--text-center{% endif %}">
+  <div class="container featured-content{% if section.settings.textAlignment == 'text-right' %} featured-content--text-right{% elsif section.settings.textAlignment == 'text-center' %} featured-content--text-center{% endif %}">
 
         <div class="grid{% if section.settings.layout == 'right' %} homepage-text-with-image--right{% else %} homepage-text-with-image--left{% endif %}{% if section.settings.textPosition == 'middle' %} homepage-text-with-image--middle{% elsif section.settings.textPosition == 'bottom' %} homepage-text-with-image--bottom{% endif %}">
 

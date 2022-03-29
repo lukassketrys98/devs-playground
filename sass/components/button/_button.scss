@@ -1,8 +1,12 @@
 .button {
 
     &.button--black {
-        @include media-breakpoint-down(md) {
+        @include media-breakpoint-down(xs) {
             width: 100%;
+        }
+
+        @include media-breakpoint-between(xs, sm){
+            width: 70%;
         }
 
         &:hover {

@@ -14,9 +14,14 @@ We highly recommend labelling changes, or App installs, so these can also be upd
   font-weight: 400;
   font-size: 16px;
 }
-@media (max-width: 767.98px) {
+@media (max-width: 575.98px) {
   .button.button--black {
     width: 100%;
+  }
+}
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .button.button--black {
+    width: 70%;
   }
 }
 .button.button--black:hover {
@@ -49,6 +54,13 @@ We highly recommend labelling changes, or App installs, so these can also be upd
 IMAGE WITH TEXT SECTION
 
 */
+.featured-content--wrapper {
+  margin: 50px 0;
+}
+.featured-content--wrapper .homepage-text-with-image--left .homepage-image-with-text--text {
+  padding-left: 40px;
+}
+
 @media (max-width: 575.98px) {
   .image-with-text--content p {
     padding-right: 0 !important;
@@ -102,4 +114,11 @@ PROMOTIONAL GRID SECTION
   .departments-slide .department-item .department-figure {
     height: 500px;
   }
+}
+
+.container {
+  max-width: 1480px;
+  padding: 0 50px;
+  margin-left: auto;
+  margin-right: auto;
 }
