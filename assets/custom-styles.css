@@ -186,3 +186,15 @@ PROMOTIONAL GRID SECTION
   margin-left: auto;
   margin-right: auto;
 }
+
+.visibility.visibility--hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+.visibility.visibility--visible {
+  visibility: visible;
+  opacity: 1;
+}
+.visibility.visibility--hide-empty:empty {
+  display: none;
+}

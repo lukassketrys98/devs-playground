@@ -93,7 +93,7 @@
 		<div class="image-with-text-overlay__content">
 
 			{% capture image_layout %}
-				<div class="image-with-text-overlay__image homepage-content--{{ section.id }}">
+				<div class="image-with-text-overlay__image visible--desktop homepage-content--{{ section.id }}">
 					<div class="height--{{ section.id }}">
 						{% if section.settings.image != blank %}
 							{%
@@ -111,7 +111,7 @@
 						{% endif %}
 					</div>
 				</div>
-                <div class="image-with-text-overlay__image--mobile homepage-content--{{ section.id }}">
+                <div class="image-with-text-overlay__image visible--mobile homepage-content--{{ section.id }}">
 					<div class="height--{{ section.id }}">
 						{% if section.settings.mobile_image != blank %}
 							{%

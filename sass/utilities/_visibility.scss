@@ -1,0 +1,15 @@
+.visibility {
+	&.visibility--hidden {
+		visibility: hidden;
+                 opacity: 0;
+	}
+	&.visibility--visible {
+		visibility: visible;
+		opacity: 1;
+	}
+	&.visibility--hide-empty {
+		&:empty {
+			display: none;
+		}
+	}
+}
