@@ -5,13 +5,7 @@ Please add any custom CSS code in here, it will be easier to transfer if updatin
 We highly recommend labelling changes, or App installs, so these can also be updated or removed as needed.
 
 */
-@media (min-width: 768px) {
-  .lubass {
-    font-size: 14px;
-  }
-}
-
-.button--black {
+.button.button--black {
   background: #1A1A1A;
   border-radius: 12px;
   color: #E7E7E7;
@@ -21,11 +15,11 @@ We highly recommend labelling changes, or App installs, so these can also be upd
   font-size: 16px;
 }
 @media (max-width: 767.98px) {
-  .button--black {
+  .button.button--black {
     width: 100%;
   }
 }
-.button--black:hover {
+.button.button--black:hover {
   background: #585757;
   color: #E7E7E7;
 }
@@ -58,5 +52,54 @@ IMAGE WITH TEXT SECTION
 @media (max-width: 575.98px) {
   .image-with-text--content p {
     padding-right: 0 !important;
+  }
+}
+/*
+
+PROMOTIONAL GRID SECTION
+
+*/
+.departments-wrapper {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+@media (max-width: 767.98px) {
+  .departments-wrapper {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+}
+
+.heading-bottom-center {
+  bottom: 0;
+  text-align: center;
+}
+
+.spacer--top {
+  top: 100px;
+}
+@media (max-width: 767.98px) {
+  .spacer--top {
+    top: unset;
+  }
+}
+
+.slick-track .spacer--top {
+  top: unset;
+}
+
+@media (max-width: 767.98px) {
+  .departments-slide .grid-item-50 {
+    width: 100% !important;
+  }
+}
+.departments-slide .department-item .department-figure {
+  height: 800px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+@media (max-width: 991.98px) {
+  .departments-slide .department-item .department-figure {
+    height: 500px;
   }
 }
