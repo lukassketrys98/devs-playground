@@ -1,5 +1,10 @@
 @mixin media-breakpoint-down($point) {
-	@if ($point == sm) {
+	@if ($point == xs) {
+		@media (max-width: $grid_breakpoint_xs_end) {
+			@content;
+		}
+	}
+	@else if ($point == sm) {
 		@media (max-width: $grid_breakpoint_xs_end) {
 			@content;
 		}
