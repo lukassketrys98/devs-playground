@@ -50,26 +50,22 @@
 			</div>
 
 			{% if section.settings.subheading != blank or section.settings.title != blank or section.settings.text != blank or section.settings.button_label != blank %}
-				<div class="image-with-text-overlay__text">
+				<div class="image-with-text-overlay__text {% if section.settings.textPosition == "left"%}image-with-text-overlay__text--padding-left {% endif %}">
 					<div class="image-with-text-overlay__text-inner">
                         {% if section.settings.subheading != blank %}
                             <h3 class="index-subheading">{{ section.settings.subheading | escape }}</h3>
                         {% endif %}
 
-                        {% if section.settings.title != blank %}
-							<h2 class="image-with-text-overlay__title">{{ section.settings.title | escape }}</h2>
-						{% endif %}
-
 						{% if section.settings.text != blank %}
 							<div class="image-with-text-overlay__subtext rte">{{ section.settings.text }}</div>
 						{% endif %}
 
+                        {% if section.settings.title != blank %}
+							<h2 class="image-with-text-overlay__title">{{ section.settings.title | escape }}</h2>
+						{% endif %}
+
 						{% if section.settings.button_label != blank and section.settings.button_link != blank %}
-							<div>
-								<a href="{{ section.settings.button_link }}" class="image-with-text-overlay__btn button hover-animation third-fade">
-									<span class="button-text">{{ section.settings.button_label | escape }}</span>
-								</a>
-							</div>
+                            {% render 'button-with-arrow-animation', button_label: section.settings.button_label, button_link: section.settings.button_link %}
 						{% endif %}
 					</div>
 				</div>
@@ -115,31 +111,45 @@
 						{% endif %}
 					</div>
 				</div>
+                <div class="image-with-text-overlay__image--mobile homepage-content--{{ section.id }}">
+					<div class="height--{{ section.id }}">
+						{% if section.settings.mobile_image != blank %}
+							{%
+								render 'image-bg',
+								image_class: 'img',
+								image: section.settings.mobile_image,
+								image_default: false,
+								image_sizes: false,
+								image_additional_content: false,
+								image_dimension: false,
+								image_link: false
+							%}
+						{% else %}
+							<span class="svg-placeholder">{{ 'lifestyle-1' | placeholder_svg_tag }}</span>
+						{% endif %}
+					</div>
+				</div>
 			{% endcapture %}
 
 			{{ image_layout }}
 
 			{% if section.settings.subheading != blank or section.settings.title != blank or section.settings.text != blank or section.settings.button_label != blank %}
-				<div class="image-with-text-overlay__text">
+				<div class="image-with-text-overlay__text {% if section.settings.textPosition == "left"%}image-with-text-overlay__text--padding-left {% endif %}">
 					<div class="image-with-text-overlay__text-inner">
                         {% if section.settings.subheading != blank %}
                             <h3 class="index-subheading">{{ section.settings.subheading | escape }}</h3>
                         {% endif %}
-                        
-                        {% if section.settings.title != blank %}
-							<h2 class="image-with-text-overlay__title">{{ section.settings.title | escape }}</h2>
-						{% endif %}
 
 						{% if section.settings.text != blank %}
 							<div class="image-with-text-overlay__subtext rte">{{ section.settings.text }}</div>
 						{% endif %}
 
+                        {% if section.settings.title != blank %}
+                            <h2 class="image-with-text-overlay__title">{{ section.settings.title | escape }}</h2>
+                        {% endif %}
+
 						{% if section.settings.button_label != blank and section.settings.button_link != blank %}
-							<div>
-								<a href="{{ section.settings.button_link }}" class="image-with-text-overlay__btn button hover-animation third-fade">
-									<span class="button-text">{{ section.settings.button_label | escape }}</span>
-								</a>
-							</div>
+                            {% render 'button-with-arrow-animation', button_label: section.settings.button_label, button_link: section.settings.button_link %}
 						{% endif %}
 					</div>
 				</div>
@@ -211,6 +221,17 @@
             "id": "image",
             "label": {
                 "en": "Image",
+                "de": "Bild",
+                "es": "Imagen",
+                "fr": "Image",
+                "pt-PT": "Imagem"
+            }
+        },
+        {
+            "type": "image_picker",
+            "id": "mobile_image",
+            "label": {
+                "en": "Mobile image",
                 "de": "Bild",
                 "es": "Imagen",
                 "fr": "Image",
@@ -488,7 +509,7 @@
             "type": "range",
             "id": "text--text-size",
             "min": 12,
-            "max": 36,
+            "max": 40,
             "step": 2,
             "unit": {
                 "en": "px",

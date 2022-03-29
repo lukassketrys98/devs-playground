@@ -5,3 +5,72 @@ Please add any custom CSS code in here, it will be easier to transfer if updatin
 We highly recommend labelling changes, or App installs, so these can also be updated or removed as needed.
 
 */
+@media (min-width: 768px) {
+  .lubass {
+    font-size: 14px;
+  }
+}
+
+/*
+
+IMAGE WITH TEXT OVERLAY SECTION
+
+*/
+@media (max-width: 767.98px) {
+  .image-with-text-overlay__content {
+    justify-content: center !important;
+    text-align: center;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .image-with-text-overlay__image {
+    display: none !important;
+  }
+}
+@media (min-width: 768px) {
+  .image-with-text-overlay__image--mobile {
+    display: none !important;
+  }
+}
+
+.image-with-text-overlay__text--padding-left {
+  padding-left: 60px;
+}
+
+.image-with-text-overlay__text .index-subheading {
+  font-family: "KudryashevHeadlineSansW01";
+  text-transform: none !important;
+  font-size: 16px;
+}
+
+.image-with-text-overlay__subtext {
+  font-family: "KudryashevHeadlineSansW01";
+  line-height: 37px;
+}
+@media (max-width: 1199.98px) {
+  .image-with-text-overlay__subtext {
+    padding-top: 40px !important;
+  }
+}
+@media (max-width: 575.98px) {
+  .image-with-text-overlay__subtext {
+    font-size: 28px !important;
+    line-height: 40px;
+  }
+}
+
+.image-with-text-overlay__title {
+  font-family: "La Paloma";
+  font-style: normal;
+  font-weight: 400;
+  color: #E7E7E7 !important;
+  padding: 60px 0;
+  text-transform: none !important;
+}
+@media (max-width: 575.98px) {
+  .image-with-text-overlay__title {
+    font-size: 22px !important;
+    line-height: 30px;
+  }
+}
