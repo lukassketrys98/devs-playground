@@ -1,6 +1,6 @@
 development:
   password: shptka_e0de63389eaef62f078964535387d944
-  theme_id: 131601596675
+  theme_id: 131601629443
   store: playground-for-devs.myshopify.com
   ignore_files:
     - settings_data.json
