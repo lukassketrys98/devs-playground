@@ -5,10 +5,48 @@ Please add any custom CSS code in here, it will be easier to transfer if updatin
 We highly recommend labelling changes, or App installs, so these can also be updated or removed as needed.
 
 */
-@media (min-width: 768px) {
-  .lubass {
-    font-size: 14px;
+.button.button--black {
+  background: #1A1A1A;
+  border-radius: 12px;
+  color: #E7E7E7;
+  font-family: "Tenor Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+}
+@media (max-width: 575.98px) {
+  .button.button--black {
+    width: 100%;
   }
+}
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .button.button--black {
+    width: 70%;
+  }
+}
+.button.button--black:hover {
+  background: #585757;
+  color: #E7E7E7;
+}
+
+.section__heading {
+  font-size: 40px !important;
+  line-height: 48px;
+  font-family: "KudryashevHeadlineSansW01";
+  font-style: normal;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 1px;
+  margin: 10px 20px;
+  padding: 10px;
+  font-feature-settings: "salt" on, "liga" off;
+}
+.section__heading--gold {
+  color: #C1A050;
+}
+.section__heading--no-margin {
+  padding: 0;
+  margin: 0;
 }
 
 /*
@@ -73,4 +111,78 @@ IMAGE WITH TEXT OVERLAY SECTION
     font-size: 22px !important;
     line-height: 30px;
   }
+}
+
+/*
+
+IMAGE WITH TEXT SECTION
+
+*/
+.featured-content--wrapper {
+  margin: 50px 0;
+}
+.featured-content--wrapper .homepage-text-with-image--left .homepage-image-with-text--text {
+  padding-left: 40px;
+}
+
+@media (max-width: 575.98px) {
+  .image-with-text--content p {
+    padding-right: 0 !important;
+  }
+}
+/*
+
+PROMOTIONAL GRID SECTION
+
+*/
+.departments-wrapper {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+@media (max-width: 767.98px) {
+  .departments-wrapper {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+}
+
+.heading-bottom-center {
+  bottom: 0;
+  text-align: center;
+}
+
+.spacer--top {
+  top: 100px;
+}
+@media (max-width: 767.98px) {
+  .spacer--top {
+    top: unset;
+  }
+}
+
+.slick-track .spacer--top {
+  top: unset;
+}
+
+@media (max-width: 767.98px) {
+  .departments-slide .grid-item-50 {
+    width: 100% !important;
+  }
+}
+.departments-slide .department-item .department-figure {
+  height: 800px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+@media (max-width: 991.98px) {
+  .departments-slide .department-item .department-figure {
+    height: 500px;
+  }
+}
+
+.container {
+  max-width: 1480px;
+  padding: 0 50px;
+  margin-left: auto;
+  margin-right: auto;
 }
