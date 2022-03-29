@@ -1,0 +1,72 @@
+/*
+
+IMAGE WITH TEXT OVERLAY SECTION
+
+*/
+
+// @font-face {
+//     font-family: "La Paloma";
+//     src: url({{ "LaPaloma.ttf" | asset_url }}) format("TrueType");
+// }
+
+.image-with-text-overlay__content {
+    @include media-breakpoint-down(md) {
+        justify-content: center !important;
+        text-align: center;
+    }
+
+}
+.image-with-text-overlay__image {
+    @include media-breakpoint-down(md) {
+        display: none !important;
+    }
+
+    &--mobile {
+        @include media-breakpoint-up(md) {
+            display: none !important;
+        }
+    }   
+}
+
+
+.image-with-text-overlay__text {
+    &--padding-left {
+        padding-left: 60px;
+    }
+
+}
+
+.image-with-text-overlay__text .index-subheading {
+    font-family: 'KudryashevHeadlineSansW01';
+    text-transform: none !important;
+    font-size: 16px;
+}
+
+.image-with-text-overlay__subtext {
+    @include media-breakpoint-down(xl) {
+        padding-top: 40px !important;
+    }
+    @include media-breakpoint-down(sm) {
+        font-size: 28px !important;
+        line-height: 40px;
+    }
+
+    font-family: 'KudryashevHeadlineSansW01';
+    line-height: 37px;
+    
+} 
+
+.image-with-text-overlay__title {
+    @include media-breakpoint-down(sm) {
+        font-size: 22px !important;
+        line-height: 30px;
+    }
+
+    font-family: 'La Paloma';
+    font-style: normal;
+    font-weight: 400;
+    color: #E7E7E7 !important;
+    padding: 60px 0;
+    text-transform: none !important;
+}
+
