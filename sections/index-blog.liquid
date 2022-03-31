@@ -27,7 +27,7 @@
           <h2 class="index__heading--text">{{ section.settings.indexBlogHeading | escape }}</h2>
         {% endif %}
         <div class="index__heading__more">
-          <a class="index__heading__more--text" href="{{section.settings.blog_link}}">View all <div class="index__heading__more--arrow">{% render 'icon-arrow-long' %}</div></a>
+          <a class="index__heading__more--text" href="{{section.settings.blog_link}}">View all <div class="index__heading__more--arrow">{% render 'icon-arrow-short arrow__icon' %}</div></a>
         </div>
       </div>
 
@@ -133,7 +133,7 @@
               <div class="index-blog-item-content">
                 <div>
                   {% if section.settings.showDate %}
-                    <time class="index-blog-published">{{ current_post.published_at | date: format: 'month_day_year' }}</time>
+                    <time class="index-blog-published">{{ current_post.published_at | date: "%d %b, %Y" }}</time>
                   {% endif %}
 
                   <a class="index-blog-title" href="{{ current_post.url }}">
@@ -144,10 +144,10 @@
                     <div class="index-blog-author">{{ 'modules.blog.posted_by' | t: author: current_post.author }}</div>
                   {% endif %}
 
-                  <p class="index-blog-text">{{ current_post.excerpt_or_content | strip_html | truncatewords: 30 }}</p>
+                  <p class="index-blog-text">{{ current_post.excerpt_or_content | strip_html | truncatewords: 20 }}</p>
                 </div>
                 <div class="read__button">
-                  <a href="{{ current_post.url }}">{{ "blogs.blog.read_more" | t }} <div class="index__heading__more--arrow">{% render 'icon-arrow-long' %}</a>
+                  <a href="{{ current_post.url }}">{{ "blogs.blog.read_more" | t }} <div class="index__heading__more--arrow">{% render 'icon-arrow-short arrow__icon' %}</a>
                 </div>
               </div>
             </article>
@@ -225,7 +225,7 @@
               <div class="index-blog-item-content">
                 <div>
                   {% if section.settings.showDate %}
-                    <time class="index-blog-published">{{ article.published_at | date: format: 'month_day_year' }}</time>
+                    <time class="index-blog-published">{{ article.published_at | date: "%d %b, %Y" }}</time>
                   {% endif %}
 
                   <a class="index-blog-title" href="{{ article.url }}">
@@ -236,10 +236,10 @@
                     <div class="index-blog-author">{{ 'modules.blog.posted_by' | t: author: article.author }}</div>
                   {% endif %}
 
-                  <p class="index-blog-text">{{ article.excerpt_or_content | strip_html | truncatewords: 30 }}</p>
+                  <p class="index-blog-text">{{ article.excerpt_or_content | strip_html | truncatewords: 20 }}</p>
                 </div>
                 <div class="read__button">
-                  <a href="{{ current_post.url }}">{{ "blogs.blog.read_more" | t }} <div class="index__heading__more--arrow">{% render 'icon-arrow-long' %}</a>
+                  <a href="{{ current_post.url }}">{{ "blogs.blog.read_more" | t }} <div class="index__heading__more--arrow">{% render 'icon-arrow-short arrow__icon' %}</a>
                 </div>
               </div>
             </article>

@@ -92,6 +92,7 @@ We highly recommend labelling changes, or App installs, so these can also be upd
   margin-bottom: 15px !important;
 }
 .blog__post__image .index-blog-published {
+  margin-bottom: 5px !important;
   font-family: "Josefin Sans";
   font-style: normal;
   font-weight: 400;
@@ -165,7 +166,7 @@ We highly recommend labelling changes, or App installs, so these can also be upd
 }
 @media (min-width: 768px) {
   .black__button__wide {
-    visibility: collapse;
+    display: none;
   }
 }
 

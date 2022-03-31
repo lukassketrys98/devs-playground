@@ -16,6 +16,6 @@
     margin: 12px;
 
     @include media-breakpoint-up(md){
-        visibility: collapse;
+        display: none;
     }
 }
