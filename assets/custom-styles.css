@@ -175,6 +175,217 @@ We highly recommend labelling changes, or App installs, so these can also be upd
   transition: transform 0.35s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
+.footer-lower {
+  border-top: unset;
+}
+.footer-lower::before {
+  display: none;
+}
+.footer-lower::after {
+  display: none;
+}
+.footer-lower--inner {
+  display: flex;
+  justify-content: space-between;
+}
+@media (min-width: 768px) {
+  .footer-lower--inner-logo {
+    flex: 1;
+  }
+}
+.footer-lower--inner-social {
+  text-align: end;
+}
+@media (min-width: 768px) {
+  .footer-lower--inner-social {
+    flex: 1;
+  }
+}
+.footer-lower--inner-social-instagram {
+  margin-left: 50px;
+}
+.footer-lower--inner-social-twitter {
+  margin-left: 50px;
+}
+@media (max-width: 767.98px) {
+  .footer-lower {
+    flex-direction: column !important;
+  }
+}
+.footer-lower .footer-copyright {
+  text-align: center !important;
+  display: flex;
+  justify-content: center;
+}
+@media (min-width: 768px) {
+  .footer-lower .footer-copyright {
+    display: none;
+  }
+}
+.footer-lower .footer-copyright--mobile-hidden {
+  flex: 1;
+  text-align: center !important;
+}
+@media (max-width: 767.98px) {
+  .footer-lower .footer-copyright--mobile-hidden {
+    display: none;
+  }
+}
+
+.main-footer {
+  padding-top: 40px;
+}
+.main-footer::after {
+  position: absolute;
+  left: 0;
+  content: " ";
+  display: block;
+  border-bottom: 1px solid #C1A050;
+  width: 100%;
+}
+.main-footer h4 {
+  font-family: "Tenor Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
+  color: #FFFFFF;
+  align-self: stretch;
+  text-transform: none;
+  letter-spacing: 1px;
+}
+.main-footer p {
+  font-family: "Josefin Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+  color: #FFFFFF;
+}
+.main-footer .footer-menu {
+  border: unset;
+}
+.main-footer .footer__logo {
+  display: flex;
+  align-items: baseline;
+  flex: 2;
+  margin-bottom: 40px;
+}
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  .main-footer .footer__logo {
+    flex: 2;
+  }
+}
+@media (max-width: 767.98px) {
+  .main-footer .footer__logo {
+    justify-content: center;
+  }
+}
+.main-footer .main__footer__blocks {
+  flex: 6;
+}
+@media (min-width: 1200px) {
+  .main-footer .main__footer__blocks {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+}
+.main-footer .main__footer__blocks .footer-menu {
+  padding-left: 12px;
+  border-top: unset !important;
+}
+@media (max-width: 1199.98px) {
+  .main-footer .main__footer__blocks .footer-menu {
+    width: 50% !important;
+  }
+}
+@media (max-width: 767.98px) {
+  .main-footer .main__footer__blocks .footer-menu {
+    margin-top: 30px;
+  }
+}
+.main-footer .main__footer__blocks .mailing-list-form {
+  width: 33%;
+}
+.main-footer .main__footer__blocks .mailing-list-form .section-title p {
+  font-family: "KudryashevHeadlineSansW01";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 40px;
+  color: #C1A050;
+  text-transform: none;
+  letter-spacing: 1px;
+}
+.main-footer .main__footer__blocks .mailing-list-form .section-title span {
+  color: #FFFFFF;
+}
+@media (min-width: 1200px) {
+  .main-footer .main__footer__blocks .mailing-list-form {
+    display: flex;
+    justify-content: end;
+  }
+}
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  .main-footer .main__footer__blocks .mailing-list-form {
+    width: 75% !important;
+    margin-top: 30px;
+  }
+}
+@media (max-width: 767.98px) {
+  .main-footer .main__footer__blocks .mailing-list-form {
+    width: 100% !important;
+  }
+}
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  .main-footer .main__footer__blocks {
+    flex: 3;
+  }
+}
+@media (max-width: 767.98px) {
+  .main-footer .main__footer__blocks {
+    display: flex;
+    flex-direction: column;
+  }
+}
+@media (max-width: 767.98px) {
+  .main-footer-inner {
+    flex-direction: column;
+  }
+}
+
+#shopify-section-footer {
+  background: #1A1A1A;
+}
+
+.email__field__footer {
+  display: inline-flex;
+  border: 1px solid white;
+  width: 281px;
+  border-radius: 3px;
+}
+@media (max-width: 767.98px) {
+  .email__field__footer {
+    width: 100%;
+  }
+}
+.email__field__footer__label {
+  width: 100%;
+  border: unset;
+}
+.email__field__footer__label .email__field__input {
+  height: 100%;
+  border: unset;
+  background: transparent;
+}
+.email__field__footer button {
+  height: 45px;
+  width: 60px !important;
+  padding: 0 24px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
 .article__page__image {
   width: 100%;
 }
