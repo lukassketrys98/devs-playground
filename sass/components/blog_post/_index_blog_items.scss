@@ -1,9 +1,17 @@
-.index__heading{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.index-header{
+    &__button{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        &--more{
+            @include media-breakpoint-down(md){
+                visibility: collapse;
+            }
+        }
+    }
 
-    &--text{
+    &__text{
         font-family: KudryashevHeadlineSansW01;
         font-style: normal;
         font-weight: 400;
@@ -14,10 +22,8 @@
         color: #212121!important;
         text-transform: none;
         letter-spacing: 0px;
-    }
-    
-    &__more{
-        &--text{
+
+        &--more{
             font-family: 'Tenor Sans';
             font-style: normal;
             font-weight: 400;
@@ -27,16 +33,14 @@
             align-items: center;
             color: #1A1A1A !important;
         }
-        &--arrow{
-            margin-left: 15px;
-        }
+    }
 
-        @include media-breakpoint-down(md){
-            visibility: collapse;
-        }
+    &__arrow{
+        margin-left: 15px;
     }
 }
-.blog__post__image {
+
+.index-blog__items {
 
     @include media-breakpoint-between(md, lg){
         overflow: scroll !important;

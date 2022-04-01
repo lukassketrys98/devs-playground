@@ -1,0 +1,41 @@
+.index-header{
+    &__button{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        &--more{
+            @include media-breakpoint-down(md){
+                visibility: collapse;
+            }
+        }
+    }
+
+    &__text{
+        font-family: KudryashevHeadlineSansW01;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 40px !important;
+        line-height: 37px;
+        display: flex;
+        align-items: center;
+        color: #212121!important;
+        text-transform: none;
+        letter-spacing: 0px;
+
+        &--more{
+            font-family: 'Tenor Sans';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 32px;
+            display: flex;
+            align-items: center;
+            color: #1A1A1A !important;
+        }
+    }
+
+    &__arrow{
+        margin-left: 15px;
+    }
+}

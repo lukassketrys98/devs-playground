@@ -22,12 +22,12 @@
       {% if hasSubheading %}
         <h3 class="index-subheading">{{ section.settings.indexBlogSubheading | escape }}</h3>
       {% endif %}
-      <div class="index__heading">
+      <div class="index-header__button">
         {% if hasHeading %}
-          <h2 class="index__heading--text">{{ section.settings.indexBlogHeading | escape }}</h2>
+          <h2 class="index-header__text">{{ section.settings.indexBlogHeading | escape }}</h2>
         {% endif %}
-        <div class="index__heading__more">
-          <a class="index__heading__more--text" href="{{section.settings.blog_link}}">View all <div class="index__heading__more--arrow">{% render 'icon-arrow-short arrow__icon' %}</div></a>
+        <div class="index-header__button--more">
+          <a class="index-header__text--more" href="{{section.settings.blog_link}}">View all <div class="index-header__arrow arrow__icon">{% render 'icon-arrow-long' %}</div></a>
         </div>
       </div>
 
@@ -37,7 +37,7 @@
     </header>
   {% endif %}
 
-  <div class="grid blog__post__image custom__scrl">
+  <div class="grid index-blog__items custom__scrl">
 
     {% case section.settings.post_limit %}
       {% when 2 %}
@@ -147,7 +147,7 @@
                   <p class="index-blog-text">{{ current_post.excerpt_or_content | strip_html | truncatewords: 20 }}</p>
                 </div>
                 <div class="read__button">
-                  <a href="{{ current_post.url }}">{{ "blogs.blog.read_more" | t }} <div class="index__heading__more--arrow">{% render 'icon-arrow-short arrow__icon' %}</a>
+                  <a href="{{ current_post.url }}">{{ "blogs.blog.read_more" | t }} <div class="index__heading__more--arrow arrow__icon">{% render 'icon-arrow-short' %}</a>
                 </div>
               </div>
             </article>
@@ -239,7 +239,7 @@
                   <p class="index-blog-text">{{ article.excerpt_or_content | strip_html | truncatewords: 20 }}</p>
                 </div>
                 <div class="read__button">
-                  <a href="{{ current_post.url }}">{{ "blogs.blog.read_more" | t }} <div class="index__heading__more--arrow">{% render 'icon-arrow-short arrow__icon' %}</a>
+                  <a href="{{ current_post.url }}">{{ "blogs.blog.read_more" | t }} <div class="index__heading__more--arrow arrow__icon">{% render 'icon-arrow-short' %}</a>
                 </div>
               </div>
             </article>
@@ -272,8 +272,8 @@
         {% endunless %}
 
     {% endcase %}
-      <a class="black__button__wide" href="{{section.settings.blog_link}}">
-        <p class="black__button__wide--text">View all</p>
+      <a class="button button--full button--accent" href="{{section.settings.blog_link}}">
+        <p class="button__text">View all</p>
       </a>
   </div>
 
