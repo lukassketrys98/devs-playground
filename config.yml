@@ -4,4 +4,4 @@ development:
   store: playground-for-devs.myshopify.com
   ignore_files:
     - settings_data.json
-    - "templates/*.json"
+    # - "templates/*.json"
