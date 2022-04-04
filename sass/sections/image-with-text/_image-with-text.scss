@@ -1,0 +1,22 @@
+/*
+
+IMAGE WITH TEXT SECTION
+
+*/
+
+
+.featured-content--wrapper {
+    margin: 50px 0;
+
+
+    .homepage-text-with-image--left .homepage-image-with-text--text{
+        padding-left: 40px;
+    }
+}
+
+@include media-breakpoint-down(sm) {
+    .image-with-text--content p{
+        padding-right: 0 !important;
+    }
+       
+}
