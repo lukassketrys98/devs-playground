@@ -361,16 +361,20 @@
   },
   "page": {
     "contact": {
-      "name": "Name",
+      "name": "Full Name",
       "name_placeholder": "Jane Smith",
-      "email": "Email",
+      "email": "Email Adress",
       "email_placeholder": "jane.smith@email.com",
       "phone": "Phone",
       "phone_placeholder": "(555) 555-1234",
       "message": "Message",
       "message_placeholder": "What can we help you with?",
       "submit": "Send",
-      "success": "Thanks for the message—we'll be in touch shortly!"
+      "success": "Thanks for the message—we'll be in touch shortly!",
+      "subject": "Subject",
+      "subject_placeholder": "Returns & Refunds",
+      "contact_info": "What are you Contacting about?",
+      "contact_info_placeholder": "Description"
     }
   },
   "password": {
