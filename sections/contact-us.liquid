@@ -6,22 +6,24 @@
   assign enable_additional_fields = section.settings.enable_additional_fields
   assign invert_colors = section.settings.invert_colors
   assign add_background = section.settings.add_background
+  assign section_heading = section.settings.section_heading
+  assign section_subheading = section.settings.section_subheading
  
 -%}
 
-<section>
-    <div class="container main-contact-form">
+<section class="contact-us">
+    <div class="container contact-us__inner">
         {% if add_background %}
           {% if section.settings.form_image != blank %}
           <style>
-              .main-contact-form .img {
+              .contact-us .img {
                 background-position: center;
                 background-repeat: no-repeat;
                 background-size: cover;
                 height: 400px;
               }
           </style>
-          <div class="main-contact-form__image {% if content_side == "right" %}main-contact-form__image--right{% endif %} main-contact-form__image--mobile-hidden">
+          <div class="contact-us__image {% if content_side == "right" %}contact-us__image--right{% endif %} contact-us__image--mobile-hidden">
             {%
               render 'image-bg',
               image_class: 'img',
@@ -34,7 +36,7 @@
             %}
           </div> 
 
-          <div class="main-contact-form__image main-contact-form__image--mobile">
+          <div class="contact-us__image contact-us__image--mobile">
             {%
               render 'image-bg',
               image_class: 'img',
@@ -48,48 +50,51 @@
           </div> 
           
           {% else %}
-						<span class="svg-placeholder {% if content_side == "right" %}main-contact-form__placeholder--right{% endif %}">{{ 'lifestyle-1' | placeholder_svg_tag }}</span>
+						<span class="svg-placeholder {% if content_side == "right" %}contact-us__placeholder--right{% endif %}">{{ 'lifestyle-1' | placeholder_svg_tag }}</span>
           {% endif %}
         {% endif %}
-        <div class="main-contact-form__content {% if content_side == "right" %}main-contact-form__content--right{% endif %}">
+        <div class="contact-us__content {% if content_side == "right" %}contact-us__content--right{% endif %}">
           {% render 'contact-form', invert_colors: invert_colors, enable_additional_fields: enable_additional_fields %}
 
-          <div class="main-contact-form__text">
-            {% if section.settings.section_heading%}
-              <h2 class="main-contact-form__heading {% if add_background == false %} main-contact-form__heading--no-background {% endif %}">{{ section.settings.section_heading}}</h2>
+          <div class="contact-us__text">
+            {% if section_heading != blank %}
+              <h2 class="contact-us__heading {% unless add_background %} contact-us__heading--no-background {% endunless %}">{{ section_heading }}</h2>
             {% endif %}
-            {% if section.settings.section_subheading%}
-              <p class="main-contact-form__subheading {% if add_background == false %} main-contact-form__subheading--no-background {% endif %}">{{ section.settings.section_subheading}}</p>
+            {% if section_subheading != blank %}
+              <p class="contact-us__subheading {% unless add_background %} contact-us__subheading--no-background {% endunless %}">{{ section_subheading }}</p>
             {% endif %}
-            {% for block in section.blocks%}
+            {% for block in section.blocks %}
               {%- liquid
                 assign heading = block.settings.heading
               -%}
               {%if block.type == 'address'%}
-                <div class="main-contact-form__info">
+                <div class="contact-us__info">
                   {% render 'contact-icons' icon: 'address'%}
-                  <div class=info-block>
-                    <h2 class="info-block__heading {% if add_background %}info-block__heading--inverted{% endif %}">{{heading}}</h2>
-                    <p class="info-block__text {% if add_background %}info-block__text--inverted{% endif %}">{{block.settings.address}}</p>
-                  </div>
+                 {% render 'contact-us-info-block'
+                    heading: heading,
+                    subheading: block.settings.address,
+                    add_background: add_background
+                   %}
               </div>
               {% endif %}
               {%if block.type == 'phone'%}
-                <div class="main-contact-form__info"> 
+                <div class="contact-us__info"> 
                   {% render 'contact-icons' icon: 'phone'%}
-                  <div class="info-block">
-                    <h2 class="info-block__heading {% if add_background %}info-block__heading--inverted{% endif %}">{{heading}}</h2>
-                    <p class="info-block__text {% if add_background %}info-block__text--inverted{% endif %}">{{block.settings.number}}</p>
-                  </div>
+                 {% render 'contact-us-info-block'
+                    heading: heading,
+                    subheading: block.settings.number,
+                    add_background: add_background
+                   %}
                 </div>
               {% endif %}
               {%if block.type == 'email_address'%}
-                <div class="main-contact-form__info">
+                <div class="contact-us__info">
                   {% render 'contact-icons' icon: 'email'%}
-                  <div class="info-block">
-                    <h2 class="info-block__heading {% if add_background %}info-block__heading--inverted{% endif %}">{{heading}}</h2>
-                    <p class="info-block__text {% if add_background %}info-block__text--inverted{% endif %}">{{block.settings.email}}</p>  
-                  </div>
+                  {% render 'contact-us-info-block'
+                    heading: heading,
+                    subheading: block.settings.email
+                    add_background: add_background
+                   %}
                 </div>
               {% endif %}
             {% endfor %}
@@ -103,7 +108,6 @@
 {% schema %}
   {
    "name": "Contact Form",
-   "class": "main-contact-form__wrapper",
    "settings":[
         {
           "type": "header",
@@ -203,7 +207,7 @@
         ]
       },
       {
-        "name": "Email_address",
+        "name": "Email address",
         "type": "email_address",
         "settings":[
           {

@@ -1,49 +1,45 @@
-.contact-us-form{
+.contact-us-form {
     background: #1A1A1A;
     border-radius: 10px;
-    padding: 40px 36px 45px;
+    padding: 40px 30px;
     flex: 2;
 
-    @include media-breakpoint-up(md){
+    @include media-breakpoint-up(md) {
         max-width: 500px;
     }
-    @include media-breakpoint-between(md, lg){
+
+    @include media-breakpoint-between(md, lg) {
         width: 500px;
     }
-    @include media-breakpoint-down(md){
+
+    @include media-breakpoint-down(md) {
         width: 100%;
-    }
-    @include media-breakpoint-between(md, xl){
-        margin-right: 50px;
-        margin-left: 50px;
+        padding: 40px 0px;
     }
 
-    &.contact-us-form--inverted{
+    &.contact-us-form--inverted {
         background: #C1A050;
-
     }
 
-    & .contact-us-form__title{
+    & .contact-us-form__title {
         font-family: 'Tenor Sans';
         font-style: normal;
         font-weight: 400;
         font-size: 14px;
         line-height: 24px;
         color: #FFFFFF;
-    
     }
 
-    & .contact-us-form__field{
+    & .contact-us-form__field {
         margin-bottom: 15px;
     }
-    
-    & .contact-us-form__input{
+
+    & .contact-us-form__input {
         background: #FFFFFF;
         border: 1px solid #808184 !important;
         box-sizing: border-box;
         border-radius: 12px !important;
         padding: 13px 0 13px 20px;
-
         width: 100%;
         font-family: 'Josefin Sans';
         font-style: normal;
@@ -51,9 +47,9 @@
         font-size: 12px;
         line-height: 22px;
         color: #808184;
-
     }
-    .button--full{
-        margin: unset;
+
+    .button--full {
+        margin: 0;
     }
 }

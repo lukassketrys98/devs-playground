@@ -4,22 +4,12 @@ PROMOTIONAL GRID SECTION
 
 */
 
-
 $promotionalGridImageHeight: 800px;
 $promotionalGridImageHeightMd: 500px;
 $spacerTop: 100px;
-$sectionGutter: 100px;
-$sectionGutterSm: 30px;
 
 .departments-wrapper {
-
-    margin-top: $sectionGutter;
-    margin-bottom: $sectionGutter;
-
-    @include media-breakpoint-down(md) {
-        margin-top: $sectionGutterSm;
-        margin-bottom: $sectionGutterSm;
-    }
+    @include add_gutter();
 }
 
 .heading-bottom-center {

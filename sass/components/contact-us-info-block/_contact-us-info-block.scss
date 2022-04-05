@@ -1,0 +1,32 @@
+.contact-us-info-block {
+    margin-left: 20px;
+
+    & .contact-us-info-block__heading  {
+        text-transform: capitalize;
+        letter-spacing: normal;
+        font-family: 'Josefin Sans';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 23px;
+        color: #1A1A1A;
+        margin-bottom: 10px;
+
+        &.contact-us-info-block__heading--inverted {
+            color: #FFFFFF;
+        }
+    }
+
+    & .contact-us-info-block__text {
+        font-family: 'Josefin Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 26px;
+        color: #808184;
+
+        &.contact-us-info-block__text--inverted {
+            color: #FFFFFF;
+        }
+    }
+}

@@ -1,53 +1,51 @@
 <div class="contact-us-form {% if invert_colors %}contact-us-form--inverted{% endif %}">
-    <main>
-        {% form 'contact', class: 'grid' %}
-            {% if form.posted_successfully? %}
-                <div class="grid-item-100">
-                    <p class="form-success">{{ 'page.contact.success' | t }}</p>
-                </div>
-            {% endif %}
-    
-            {% if form.errors %}
-                <div class="grid-item-100">
-                    <span class="form-error">{{ form.errors | default_errors }}</span>
-                </div>
-            {% endif %}
-    
-            <div class="contact-us-form__field grid-item-100">
-                {% assign name_attr = 'page.contact.name' | t | handle %}
-                <label for="ContactFormName" class="form-label" aria-label="{{ 'page.contact.name' | t }}">
-                    <span class="contact-us-form__title">{{ 'page.contact.name' | t }}</span>
-                    <input type="text" id="ContactFormName" class="contact-us-form__input" name="contact[{{ name_attr }}]" placeholder="{{ 'page.contact.name_placeholder' | t }}" autocapitalize="words" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+    {% form 'contact', class: 'grid' %}
+        {% if form.posted_successfully? %}
+            <div class="grid-item-100">
+                <p class="form-success">{{ 'page.contact.success' | t }}</p>
+            </div>
+        {% endif %}
+
+        {% if form.errors %}
+            <div class="grid-item-100">
+                <span class="form-error">{{ form.errors | default_errors }}</span>
+            </div>
+        {% endif %}
+
+        <div class="contact-us-form__field grid-item-100">
+            {% assign name_attr = 'page.contact.name' | t | handle %}
+            <label for="ContactFormName" class="form-label" aria-label="{{ 'page.contact.name' | t }}">
+                <span class="contact-us-form__title">{{ 'page.contact.name' | t }}</span>
+                <input type="text" id="ContactFormName" class="contact-us-form__input" name="contact[{{ name_attr }}]" placeholder="{{ 'page.contact.name_placeholder' | t }}" autocapitalize="words" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+            </label>
+        </div>
+
+        <div class="contact-us-form__field grid-item-100">
+            <label for="ContactFormEmail" class="form-label" aria-label="{{ 'page.contact.email' | t }}">
+                <span class="contact-us-form__title">{{ 'page.contact.email' | t }}</span>
+                <input type="email" id="ContactFormEmail" class="contact-us-form__input" name="contact[email]" placeholder="{{ 'page.contact.email_placeholder' | t }}" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
+            </label>
+        </div>
+
+        <div class="contact-us-form__field grid-item-100">
+            {% assign name_attr = 'page.contact.subject' | t | handle %}
+            <label for="ContactFormSubject" class="form-label" aria-label="{{ 'page.contact.subject' | t }}">
+                <span class="contact-us-form__title">{{ 'page.contact.subject' | t }}</span>
+                <input type="tel" id="ContactFormSubject" class="contact-us-form__input" name="contact[Topic]" placeholder="{{ 'page.contact.subject_placeholder' | t }}" >
+            </label>
+        </div>
+        
+        {% if enable_additional_fields %}
+            <div class="contact-us-form__field form-field-textarea grid-item-100">
+                <label for="ContactFormMessage" class="form-label" aria-label="{{ 'page.contact.message' | t }}">
+                    <span class="contact-us-form__title">{{ 'page.contact.message' | t }}</span>
+                    <textarea rows="10" id="ContactFormMessage" class="contact-us-form__input form-input form-full" name="contact[body]" placeholder="{{ 'page.contact.message_placeholder' | t }}">{% if form.body %}{{ form.body }}{% endif %}</textarea>
                 </label>
             </div>
-    
-            <div class="contact-us-form__field grid-item-100">
-                <label for="ContactFormEmail" class="form-label" aria-label="{{ 'page.contact.email' | t }}">
-                    <span class="contact-us-form__title">{{ 'page.contact.email' | t }}</span>
-                    <input type="email" id="ContactFormEmail" class="contact-us-form__input" name="contact[email]" placeholder="{{ 'page.contact.email_placeholder' | t }}" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
-                </label>
-            </div>
-    
-            <div class="contact-us-form__field grid-item-100">
-                {% assign name_attr = 'page.contact.subject' | t | handle %}
-                <label for="ContactFormSubject" class="form-label" aria-label="{{ 'page.contact.subject' | t }}">
-                    <span class="contact-us-form__title">{{ 'page.contact.subject' | t }}</span>
-                    <input type="tel" id="ContactFormSubject" class="contact-us-form__input" name="contact[{{ name_attr }}]" placeholder="{{ 'page.contact.subject_placeholder' | t }}" >
-                </label>
-            </div>
-            
-            {% if enable_additional_fields %}
-                <div class="contact-us-form__field form-field-textarea grid-item-100">
-                    <label for="ContactFormMessage" class="form-label" aria-label="{{ 'page.contact.message' | t }}">
-                        <span class="contact-us-form__title">{{ 'page.contact.message' | t }}</span>
-                        <textarea rows="10" id="ContactFormMessage" class="contact-us-form__input form-input form-full" name="contact[body]" placeholder="{{ 'page.contact.message_placeholder' | t }}">{% if form.body %}{{ form.body }}{% endif %}</textarea>
-                    </label>
-                </div>
-            {% endif %}
-            
-            <div class="form-actions grid-item-100">
-                <button type="submit" class="button button--full button--gold {% if invert_colors %}button--black{% endif %}" value="{{ 'page.contact.submit' | t }}" aria-label="{{ 'page.contact.submit' | t }}"><span class="button-text">{{ 'page.contact.submit' | t }}</span></button>
-            </div>
-        {% endform %}
-    </main>
+        {% endif %}
+        
+        <div class="form-actions grid-item-100">
+            <button type="submit" class="button button--full {% if invert_colors %}button--black{% else %}button--gold{% endif %}" value="{{ 'page.contact.submit' | t }}" aria-label="{{ 'page.contact.submit' | t }}"><span class="button-text">{{ 'page.contact.submit' | t }}</span></button>
+        </div>
+    {% endform %}
   </div>
