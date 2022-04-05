@@ -273,6 +273,16 @@
       },
       {
         "type": "header",
+        "content": "Footer"
+      },
+      {
+        "type": "color",
+        "id": "color_footer_background",
+        "label": "Background",
+        "default": "#1A1A1A"
+      },
+      {
+        "type": "header",
         "content": {
           "en": "Popup",
           "de": "Popup",

@@ -38,14 +38,14 @@
       <p class="form-success">{{ 'password.mailing_list.success' | t }}</p>
     {% else %}
 
-      <div class="form-field email__field__footer">
+      <div class="form-field email-field">
           <input type="hidden" name="contact[tags]" value="" data-mailing-list-tags>
 
-        <label class="form-label email__field__footer__label" for="{% if context == 'footer-menu' %}footer-{% endif %}mailing-list-email" aria-label="{{ 'modules.mailing_list.email' | t }}">
-          <input class="form-input form-full email__field__input" type="email" name="contact[email]" id="{% if context == 'footer-menu' %}footer-{% endif %}mailing-list-email" placeholder="{{ 'modules.mailing_list.email' | t }}" value="{{ customer.email }}">
+        <label class="form-label email-field__label" for="{% if context == 'footer-menu' %}footer-{% endif %}mailing-list-email" aria-label="{{ 'modules.mailing_list.email' | t }}">
+          <input class="form-input form-full email-field__input" type="email" name="contact[email]" id="{% if context == 'footer-menu' %}footer-{% endif %}mailing-list-email" placeholder="{{ 'modules.mailing_list.email' | t }}" value="{{ customer.email }}">
         </label>
 
-        <button class="button hover-animation {% if isPassword %}leader{% endif %}" type="submit" value="{{ 'modules.mailing_list.join' | t }}" aria-label="{{ 'modules.mailing_list.join' | t }}">{% render 'icon-arrow-down'%}</button>
+        <button class="button button--gold hover-animation {% if isPassword %}leader{% endif %}" type="submit" value="{{ 'modules.mailing_list.join' | t }}" aria-label="{{ 'modules.mailing_list.join' | t }}">{% render 'icon-arrow-down'%}</button>
 
         {% if isPassword %}
           <button class="button sidekick" type="button" aria-label="{{ 'password.general.enter' | t }}" onclick="$('[data-password-form-wrapper]').toggleClass('visible')">{{ 'password.general.enter' | t }}</button>

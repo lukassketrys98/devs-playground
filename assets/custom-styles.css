@@ -5,6 +5,22 @@ Please add any custom CSS code in here, it will be easier to transfer if updatin
 We highly recommend labelling changes, or App installs, so these can also be updated or removed as needed.
 
 */
+.button.button--gold {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 24px;
+  background: #C1A050;
+  border-radius: 12px;
+  font-family: "Tenor Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  color: #FFFFFF;
+}
+
 .article__page__share {
   display: flex;
   justify-content: space-between;
@@ -176,7 +192,29 @@ We highly recommend labelling changes, or App installs, so these can also be upd
 }
 
 .footer-lower {
-  border-top: unset;
+  border-top: unset !important;
+}
+@media (max-width: 767.98px) {
+  .footer-lower {
+    padding-left: unset !important;
+    padding-right: unset !important;
+  }
+}
+.footer-lower .footer-lower--no-logo {
+  justify-content: end;
+}
+@media (max-width: 767.98px) {
+  .footer-lower .footer-lower--no-logo {
+    justify-content: center;
+  }
+}
+.footer-lower .footer-lower--no-socials {
+  justify-content: start;
+}
+@media (max-width: 767.98px) {
+  .footer-lower .footer-lower--no-socials {
+    justify-content: center;
+  }
 }
 .footer-lower::before {
   display: none;
@@ -184,27 +222,32 @@ We highly recommend labelling changes, or App installs, so these can also be upd
 .footer-lower::after {
   display: none;
 }
-.footer-lower--inner {
+@media (min-width: 768px) {
+  .footer-lower .footer-lower__logo {
+    width: 34%;
+  }
+}
+.footer-lower .footer-lower__inner {
   display: flex;
   justify-content: space-between;
 }
-@media (min-width: 768px) {
-  .footer-lower--inner-logo {
-    flex: 1;
+@media (max-width: 767.98px) {
+  .footer-lower .footer-lower__inner {
+    justify-content: space-between;
   }
 }
-.footer-lower--inner-social {
+.footer-lower .footer-lower__social-wrapper {
   text-align: end;
 }
 @media (min-width: 768px) {
-  .footer-lower--inner-social {
-    flex: 1;
+  .footer-lower .footer-lower__social-wrapper {
+    width: 33%;
   }
 }
-.footer-lower--inner-social-instagram {
+.footer-lower .footer-lower__instagram {
   margin-left: 50px;
 }
-.footer-lower--inner-social-twitter {
+.footer-lower .footer-lower__twitter {
   margin-left: 50px;
 }
 @media (max-width: 767.98px) {
@@ -212,28 +255,35 @@ We highly recommend labelling changes, or App installs, so these can also be upd
     flex-direction: column !important;
   }
 }
-.footer-lower .footer-copyright {
+.footer-lower .footer-lower__copyright {
   text-align: center !important;
   display: flex;
   justify-content: center;
 }
+@media (max-width: 767.98px) {
+  .footer-lower .footer-lower__copyright {
+    margin-top: 15px;
+  }
+}
 @media (min-width: 768px) {
-  .footer-lower .footer-copyright {
+  .footer-lower .footer-lower__copyright {
     display: none;
   }
 }
-.footer-lower .footer-copyright--mobile-hidden {
-  flex: 1;
+.footer-lower .footer-lower__copyright--mobile-hidden {
+  width: 33%;
   text-align: center !important;
 }
 @media (max-width: 767.98px) {
-  .footer-lower .footer-copyright--mobile-hidden {
+  .footer-lower .footer-lower__copyright--mobile-hidden {
     display: none;
   }
 }
 
-.main-footer {
-  padding-top: 40px;
+@media (min-width: 768px) {
+  .main-footer {
+    padding-top: 40px;
+  }
 }
 .main-footer::after {
   position: absolute;
@@ -265,49 +315,64 @@ We highly recommend labelling changes, or App installs, so these can also be upd
 .main-footer .footer-menu {
   border: unset;
 }
-.main-footer .footer__logo {
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  .main-footer .footer-menu {
+    padding-left: unset !important;
+  }
+}
+@media (max-width: 767.98px) {
+  .main-footer .footer-menu {
+    padding-left: 30px !important;
+  }
+  .main-footer .footer-menu:last-child {
+    padding-left: unset !important;
+  }
+}
+.main-footer .main-footer__logo {
   display: flex;
   align-items: baseline;
   flex: 2;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 @media (min-width: 768px) and (max-width: 1199.98px) {
-  .main-footer .footer__logo {
+  .main-footer .main-footer__logo {
     flex: 2;
   }
 }
 @media (max-width: 767.98px) {
-  .main-footer .footer__logo {
+  .main-footer .main-footer__logo {
     justify-content: center;
+    margin-top: 20px;
   }
 }
-.main-footer .main__footer__blocks {
+.main-footer .main-footer__blocks {
   flex: 6;
 }
 @media (min-width: 1200px) {
-  .main-footer .main__footer__blocks {
+  .main-footer .main-footer__blocks {
     display: flex;
     flex-wrap: nowrap;
+    justify-content: space-between;
   }
 }
-.main-footer .main__footer__blocks .footer-menu {
+.main-footer .main-footer__blocks .footer-menu {
   padding-left: 12px;
   border-top: unset !important;
 }
 @media (max-width: 1199.98px) {
-  .main-footer .main__footer__blocks .footer-menu {
+  .main-footer .main-footer__blocks .footer-menu {
     width: 50% !important;
   }
 }
 @media (max-width: 767.98px) {
-  .main-footer .main__footer__blocks .footer-menu {
+  .main-footer .main-footer__blocks .footer-menu {
     margin-top: 30px;
   }
 }
-.main-footer .main__footer__blocks .mailing-list-form {
+.main-footer .main-footer__blocks .footer-menu.mailing-list-form {
   width: 33%;
 }
-.main-footer .main__footer__blocks .mailing-list-form .section-title p {
+.main-footer .main-footer__blocks .footer-menu.mailing-list-form .section-title p {
   font-family: "KudryashevHeadlineSansW01";
   font-style: normal;
   font-weight: 400;
@@ -317,73 +382,85 @@ We highly recommend labelling changes, or App installs, so these can also be upd
   text-transform: none;
   letter-spacing: 1px;
 }
-.main-footer .main__footer__blocks .mailing-list-form .section-title span {
+.main-footer .main-footer__blocks .footer-menu.mailing-list-form .section-title span {
   color: #FFFFFF;
 }
 @media (min-width: 1200px) {
-  .main-footer .main__footer__blocks .mailing-list-form {
+  .main-footer .main-footer__blocks .footer-menu.mailing-list-form {
     display: flex;
     justify-content: end;
   }
 }
 @media (min-width: 768px) and (max-width: 1199.98px) {
-  .main-footer .main__footer__blocks .mailing-list-form {
+  .main-footer .main-footer__blocks .footer-menu.mailing-list-form {
     width: 75% !important;
     margin-top: 30px;
   }
 }
 @media (max-width: 767.98px) {
-  .main-footer .main__footer__blocks .mailing-list-form {
+  .main-footer .main-footer__blocks .footer-menu.mailing-list-form {
     width: 100% !important;
   }
 }
 @media (min-width: 768px) and (max-width: 1199.98px) {
-  .main-footer .main__footer__blocks {
+  .main-footer .main-footer__blocks {
     flex: 3;
   }
 }
 @media (max-width: 767.98px) {
-  .main-footer .main__footer__blocks {
+  .main-footer .main-footer__blocks {
     display: flex;
     flex-direction: column;
   }
 }
+.main-footer .main-footer-inner {
+  padding-top: unset !important;
+}
 @media (max-width: 767.98px) {
-  .main-footer-inner {
+  .main-footer .main-footer-inner {
     flex-direction: column;
   }
 }
-
-#shopify-section-footer {
-  background: #1A1A1A;
-}
-
-.email__field__footer {
+.main-footer .email-field {
   display: inline-flex;
   border: 1px solid white;
   width: 281px;
   border-radius: 3px;
 }
 @media (max-width: 767.98px) {
-  .email__field__footer {
+  .main-footer .email-field {
     width: 100%;
   }
 }
-.email__field__footer__label {
+.main-footer .email-field .email-field__label {
   width: 100%;
   border: unset;
 }
-.email__field__footer__label .email__field__input {
+.main-footer .email-field .email-field__label .email-field__input {
   height: 100%;
   border: unset;
   background: transparent;
 }
-.email__field__footer button {
+.main-footer .email-field .email-field__label .email-field__input::placeholder {
+  font-family: "Josefin Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: #FFFFFF;
+}
+.main-footer .email-field button {
   height: 45px;
   width: 60px !important;
   padding: 0 24px;
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
+}
+.main-footer .email-field button.button--gold {
+  border-radius: unset;
+}
+.main-footer .email-field button svg {
+  z-index: 1;
 }
 
 .article__page__image {
