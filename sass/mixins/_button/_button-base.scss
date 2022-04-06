@@ -1,0 +1,11 @@
+@mixin button-base {
+	@include base-font-stack;
+	vertical-align: middle;
+	text-align: center;
+	text-decoration: none;
+	white-space: normal;
+	cursor: pointer;
+	appearance: none;
+	user-select: none;
+    position: relative;
+}

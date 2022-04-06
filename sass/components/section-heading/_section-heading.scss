@@ -1,4 +1,4 @@
-@import '../../abstracts/variables';
+// @import '../../abstracts/variables';
 
 .section__heading {
     font-size: 40px !important;
@@ -13,7 +13,7 @@
     font-feature-settings: 'salt' on, 'liga' off;
 
     &--gold{
-        color: $color_gold;
+        color: $color_accent;
     }
 
     &--no-margin{
