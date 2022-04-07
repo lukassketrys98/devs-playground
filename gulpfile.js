@@ -1,18 +1,18 @@
-  const gulp = require('gulp');
-  const sass = require('gulp-sass')(require('sass'));
-  const themeKit = require('@shopify/themekit');
-  // const clean = require('gulp-clean-css');
+const gulp = require("gulp");
+const sass = require("gulp-sass")(require("sass"));
+const cleanCSS = require("gulp-clean-css");
+const autoprefixer = require("gulp-autoprefixer");
+const rename = require("gulp-rename");
 
-  gulp.task('sass', function(){
-    return gulp.src('sass/custom-styles.scss')
-            .pipe(sass())
-            // .pipe(clean({ compatibility: 'ie11'}))
-            .pipe(gulp.dest('assets'))
-  });
+gulp.task("sass", () => {
+    return gulp.src("styles/*.scss")
+        .pipe(sass())
+        .pipe(autoprefixer("last 4 version"))
+        .pipe(cleanCSS())
+        .pipe(rename({ suffix: ".min" }))
+        .pipe(gulp.dest("assets"))
+});
 
-  gulp.task('watch', function(){
-    gulp.watch('sass/**/*.scss', gulp.series('sass'))
-    themeKit.command('watch', {
-        env: 'development'
-    })
-  });
+gulp.task("watch", () => {
+    gulp.watch("styles/**/*.scss", gulp.series("sass"))
+});

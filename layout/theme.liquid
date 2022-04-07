@@ -36,8 +36,7 @@
   {{ 'theme.min.css' | asset_url | stylesheet_tag }}
   {% endif %}
 
-  {{ 'custom.css' | asset_url | stylesheet_tag }}
-  {{ 'custom-styles.css' | asset_url | stylesheet_tag }}
+  {{ 'custom.min.css' | asset_url | stylesheet_tag }}
 
   {% render 'theme-object' %}
 
