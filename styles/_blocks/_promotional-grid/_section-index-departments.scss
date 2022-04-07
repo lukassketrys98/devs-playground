@@ -1,0 +1,19 @@
+.section-index-departments {
+    .departments-wrapper {
+      margin-top: $section_gutter;
+      margin-bottom: $section_gutter * 2;
+  
+      @include media-breakpoint-down(md) {
+        margin-top: $section_gutter_sm;
+        margin-bottom: $section_gutter_sm;
+      }
+    }
+  
+    .departments-slide {
+      .grid-item-50 {
+        @include media-breakpoint-down(md) {
+          width: 100% !important;
+        }
+      }
+    }
+  }

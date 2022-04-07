@@ -1,0 +1,38 @@
+.department-item {
+    &.department-item--gap {
+      top: 100px;
+  
+      .slick-track & {
+        top: unset;
+      }
+  
+      @include media-breakpoint-down(md) {
+        top: unset;
+      }
+    }
+  
+    .department-item__title {
+      margin: 0 !important;
+      text-transform: none !important;
+      letter-spacing: 0 !important;
+    }
+  
+    .department-figure {
+      height: 800px;
+      object-fit: cover;
+      border-radius: $border_radius;
+    }
+  
+    figure {
+      &:before {
+        border-radius: $border_radius;
+      }
+    }
+  
+    figcaption {
+      &.center {
+        top: auto !important;
+        transform: none !important;
+      }
+    }
+  }

@@ -1,0 +1,6 @@
+@mixin heading-font-stack {
+    @include base-font-styles;
+    font-family: 'Kudryashev Headline', sans-serif !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+  }

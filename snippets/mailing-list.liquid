@@ -1,28 +1,24 @@
-{% assign isPassword = false %}
+{% assign is_password = false %}
 {% if template == "password" %}
-  {% assign isPassword = true %}
+  {% assign is_password = true %}
 {% endif %}
 
 <div class="form {% if context == 'footer-menu' %}grid-item-25{% endif %} {{ context }} mailing-list-form" data-mailing-list {{ block.shopify_attributes }}>
   {% form "customer" %}
 
-    {% assign mailingListHeader = 'modules.mailing_list.header' | t %}
+    {% assign mailing_list_header = 'modules.mailing_list.header' | t %}
 
     {% if context == 'footer-menu' %}
-      {% if mailTitle != '' %}
-        {% assign newsletterTitle = mailTitle %}
-      {% endif %}
-
-      {% if newsletterTitle != blank %}
-        <h5 class="section-title">{{ newsletterTitle }}</h5>
+      {% if mail_title != blank %}
+        <h4 class="">{{ mail_title }}</h4>
       {% else %}
-        <h5 class="section-title">{{ mailingListHeader }}</h5>
+        <h4 class="section-title">{{ mailing_list_header }}</h4>
       {% endif %}
     {% endif %}
 
     {% if template == 'password' %}
-      {% if mailingListHeader != blank %}
-        <h5 class="section-title">{{ mailingListHeader }}</h5>
+      {% if mailing_list_header != blank %}
+        <h5 class="section-title">{{ mailing_list_header }}</h5>
       {% endif %}
     {% endif %}
 
@@ -38,20 +34,22 @@
       <p class="form-success">{{ 'password.mailing_list.success' | t }}</p>
     {% else %}
 
-      <div class="form-field">
+      <div class="form-field email-field">
           <input type="hidden" name="contact[tags]" value="" data-mailing-list-tags>
 
-        <label class="form-label" for="{% if context == 'footer-menu' %}footer-{% endif %}mailing-list-email" aria-label="{{ 'modules.mailing_list.email' | t }}">
-          <input class="form-input form-full" type="email" name="contact[email]" id="{% if context == 'footer-menu' %}footer-{% endif %}mailing-list-email" placeholder="{{ 'modules.mailing_list.email' | t }}" value="{{ customer.email }}">
+        <label class="form-label email-field__label" for="{% if context == 'footer-menu' %}footer-{% endif %}mailing-list-email" aria-label="{{ 'modules.mailing_list.email' | t }}">
+          <input class="form-input form-full email-field__input" type="email" name="contact[email]" id="{% if context == 'footer-menu' %}footer-{% endif %}mailing-list-email" placeholder="{{ 'modules.mailing_list.email' | t }}" value="{{ customer.email }}">
         </label>
+
+        <button class="button button--gold hover-animation {% if is_password %}leader{% endif %}" type="submit" value="{{ 'modules.mailing_list.join' | t }}" aria-label="{{ 'modules.mailing_list.join' | t }}">{% render 'icon-arrow-down'%}</button>
+
+        {% if is_password %}
+          <button class="button sidekick" type="button" aria-label="{{ 'password.general.enter' | t }}" onclick="$('[data-password-form-wrapper]').toggleClass('visible')">{{ 'password.general.enter' | t }}</button>
+        {% endif %}
       </div>
 
       <div class="form-actions">
-        <button class="button hover-animation {% if isPassword %}leader{% endif %}" type="submit" value="{{ 'modules.mailing_list.join' | t }}" aria-label="{{ 'modules.mailing_list.join' | t }}"><span class="button-text">{{ 'modules.mailing_list.join' | t }}</span></button>
 
-        {% if isPassword %}
-          <button class="button sidekick" type="button" aria-label="{{ 'password.general.enter' | t }}" onclick="$('[data-password-form-wrapper]').toggleClass('visible')">{{ 'password.general.enter' | t }}</button>
-        {% endif %}
       </div>
     {% endif %}
 

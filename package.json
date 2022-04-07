@@ -16,11 +16,14 @@
   },
   "homepage": "https://github.com/lukassketrys98/devs-playground#readme",
   "dependencies": {
-    "@shopify/themekit": "^1.1.9"
+    "@shopify/themekit": "^1.1.9",
+    "i": "^0.3.7"
   },
   "devDependencies": {
     "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
     "gulp-clean-css": "^4.3.0",
+    "gulp-rename": "^1.4.0",
     "gulp-sass": "^5.1.0",
     "sass": "^1.49.9"
   },

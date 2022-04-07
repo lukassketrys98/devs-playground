@@ -1,0 +1,56 @@
+<section class="article-cards-section">
+        <div class="container article-cards-section--heading">
+            <p class="article-cards-section--text">{{ section.settings.article_cards_heading}}</p>
+            <div class="article-cards-section--button">
+                <a class="article-cards-section--button-text" href="{{section.settings.blog_link}}">View all <div class="article-cards-section--button-arrow arrow__icon">{% render 'icon-arrow-long' %}</div></a>
+                
+            </div>
+            
+        </div>
+    <div class="container article-cards">
+        {%- for block in section.blocks -%}
+            {% assign article = block.settings.article %}
+            {% if article != blank%} 
+                {% render 'blog-article' with article: article%}
+            {% endif %}
+	    {%- endfor -%}
+    </div>
+</section>
+  
+{% schema %}
+{
+	"name": "Article Cards",
+    "class": "article-cards-section",
+	"settings": [
+        {
+        "type": "text",
+        "id": "article_cards_heading",
+        "label": "Heading"
+        },
+        {
+            "type": "url",
+            "id": "blog_link",
+            "label": "Blog link"
+        }
+	],
+	"blocks": [
+        {
+            "type": "article",
+            "limit": 4,
+            "name": "Article",
+            "settings": [
+                {
+                    "type": "article",
+                    "id": "article",
+                    "label": "Article"
+                }
+            ]
+        }   
+	],
+	"presets": [
+		{
+			"name": "Article Cards"
+		}
+	]
+}
+{% endschema %}

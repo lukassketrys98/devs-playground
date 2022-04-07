@@ -1,0 +1,6 @@
+@mixin quotes-font-stack {
+    @include base-font-styles;
+    font-family: 'La Paloma', sans-serif !important;
+    font-style: normal;
+    font-weight: 400;
+}

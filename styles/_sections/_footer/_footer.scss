@@ -1,0 +1,278 @@
+.footer-lower {
+    @include media-breakpoint-down(md){
+        padding-left: unset !important;
+        padding-right: unset !important;
+    }
+    & .footer-lower--no-logo {
+        justify-content: end;
+
+        @include media-breakpoint-down(md) {
+            justify-content: center;
+        }
+    }
+
+    & .footer-lower--no-socials {
+        justify-content: start;
+
+        @include media-breakpoint-down(md) {
+            justify-content: center;
+        }
+    }
+
+    border-top: unset !important;
+
+    &::before {
+        display: none;
+    }
+
+    &::after {
+        display: none;
+    }
+
+    & .footer-lower__logo {
+        @include media-breakpoint-up(md) {
+            width: 34%;
+        }
+    }
+
+    & .footer-lower__inner {
+        display: flex;
+        justify-content: space-between;
+
+        @include media-breakpoint-down(md) {
+            justify-content: space-between;
+        }
+    }
+
+    & .footer-lower__social-wrapper {
+        @include media-breakpoint-up(md) {
+            width: 33%;
+        }
+
+        text-align: end;
+    }
+
+    & .footer-lower__instagram {
+        margin-left: 50px;
+    }
+
+    & .footer-lower__twitter {
+        margin-left: 50px;
+    }
+
+    @include media-breakpoint-down(md) {
+        flex-direction: column !important;
+    }
+
+    .footer-lower__copyright {
+        text-align: center !important;
+        display: flex;
+        justify-content: center;
+        
+        @include media-breakpoint-down(md){
+            margin-top: 15px;
+        }
+
+        @include media-breakpoint-up(md) {
+            display: none;
+        }
+
+        &--mobile-hidden {
+            width: 33%;
+            text-align: center !important;
+
+            @include media-breakpoint-down(md) {
+                display: none;
+            }
+        }
+    }
+
+}
+
+.main-footer {
+    @include media-breakpoint-up(md) {
+        padding-top: 40px; 
+    }
+
+    &::after {
+        position: absolute;
+        left: 0;
+        content: " ";
+        display: block;
+        border-bottom: 1px solid #C1A050;
+        width: 100%;
+
+        @include media-breakpoint-down(md) {
+            width: 94%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+
+    & p {
+        font-family: 'Josefin Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 26px;
+        color: #FFFFFF;
+    }
+
+    & .footer-menu {
+        border: unset;
+
+        @include media-breakpoint-between(md, xl) {
+            padding-left: unset !important;
+        }
+
+        @include media-breakpoint-down(md) {
+            padding-left: 30px !important;
+
+            &:last-child {
+                padding-left: unset !important;
+            }
+        }
+    }
+
+    & .main-footer__logo {
+        display: flex;
+        align-items: baseline;
+        flex: 2;
+        margin-bottom: 20px;
+
+        @include media-breakpoint-between(md, lg) {
+            flex: 2;
+        }
+
+        @include media-breakpoint-down(md) {
+            justify-content: center;
+            margin-top: 20px;
+        }
+    }
+
+    & .main-footer__blocks {
+        flex: 6;
+
+        @include media-breakpoint-up(xl) {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+        }
+
+        & .footer-menu {
+            padding-left: 12px;
+            border-top: unset !important;
+
+            @include media-breakpoint-down(xl) {
+                width: 50% !important;
+            }
+
+            @include media-breakpoint-down(md) {
+                margin-top: 30px;
+            }
+
+            &.mailing-list-form {
+
+                & .section-title {
+                    & p {
+                        font-family: 'KudryashevHeadlineSansW01';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 28px;
+                        line-height: 40px;
+                        color: #C1A050;
+                        text-transform: none;
+                        letter-spacing: 1px;
+                    }
+
+                    & span {
+                        color: #FFFFFF;
+                    }
+
+
+                }
+
+                width: 33%;
+
+                @include media-breakpoint-up(xl) {
+                    display: flex;
+                    justify-content: end;
+                }
+
+                @include media-breakpoint-between(md, lg) {
+                    width: 75% !important;
+                    margin-top: 30px;
+                }
+
+                @include media-breakpoint-down(md) {
+                    width: 100% !important;
+                }
+            }
+        }
+
+
+        @include media-breakpoint-between(md, lg) {
+            flex: 3;
+        }
+
+        @include media-breakpoint-down(md) {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    & .main-footer-inner {
+        padding-top: unset !important;
+
+        @include media-breakpoint-down(md) {
+            flex-direction: column;
+
+        }
+    }
+
+    & .email-field {
+        display: inline-flex;
+        border: 1px solid white;
+        width: 281px;
+        border-radius: 3px;
+
+        @include media-breakpoint-down(md) {
+            width: 100%;
+        }
+
+        & .email-field__label {
+            width: 100%;
+            border: unset;
+
+            & .email-field__input {
+                height: 100%;
+                border: unset;
+                background: transparent;
+                &::placeholder{
+                    font-family: 'Josefin Sans';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 14px;
+                    line-height: 22px;
+                    color: #FFFFFF;
+                }
+            }
+        }
+
+        & button {
+            height: 45px;
+            width: 60px !important;
+            padding: 0 24px;
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+
+            &.button--gold {
+                border-radius: unset;
+            }
+
+            & svg {
+                z-index: 1;
+            }
+        }
+    }
+}

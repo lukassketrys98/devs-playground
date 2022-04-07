@@ -1,0 +1,79 @@
+.button {
+    min-width: 175px;
+    max-width: 100%;
+    padding: 15px 30px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 32px;
+    box-shadow: none;
+  
+    &:not(.disabled):not([disabled]) {
+      &:hover,
+      &:focus,
+      &:active {
+        &.button--primary {
+          background-color: $color_accent;
+        }
+  
+        &.button--secondary {
+          background-color: $color_primary;
+          color: $color_light;
+        }
+  
+        &.button--accent {
+          background-color: $color_accent;
+          color: $color_light;
+        }
+      }
+    }
+  
+    &.button--primary {
+      border-color: $color_primary;
+      background-color: $color_primary;
+      color: $color_light;
+    }
+  
+    &.button--secondary {
+      border-color: $color_primary;
+      background-color: $color_light;
+      color: $color_primary;
+    }
+  
+    &.button--accent {
+      border-color: $color_accent;
+      background-color: $color_light;
+      color: $color_primary;
+    }
+  
+    &.button--sm {
+      padding: 11px 19px;
+      line-height: 22px;
+      font-size: 14px;
+    }
+  
+    &.button--lg {
+      line-height: 30px;
+      font-size: 20px;
+    }
+  
+    &.button--full {
+      width: 100%;
+    }
+  
+    &.button--square {
+      width: 40px;
+      height: 40px;
+      border-radius: 3px;
+    }
+  
+    &.button--upper {
+      text-transform: uppercase;
+    }
+  
+    &.disabled,
+    &[disabled] {
+      background-color: $color_light_dark;
+      color: $color_dark;
+    }
+  }

@@ -1,0 +1,13 @@
+.custom__scrl{
+    &::-webkit-scrollbar{
+        height: 4px;
+    }
+    &::-webkit-scrollbar-track {
+        background: #E7E7E7;
+        border-radius: 4px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: #C1A050;
+        border-radius: 3px; 
+    }
+}

@@ -4,46 +4,24 @@
   {% assign commentCount = article.comments_count | plus: 1 %}
 {% endif %}
 
-<header class="page-header-wrapper">
-  <time class="article-published">{{ article.published_at | date: format: 'month_day_year' }}</time>
+<!-- <header class="page-header-wrapper">
   <h1 class="page-header">{{ article.title }}</h1>
 
-  {% if blog.previous_article or blog.next_article %}
-    {% if blog.previous_article %}
-      <a class="article-previous" href="{{ blog.previous_article }}">
-        <svg><use xlink:href="#icon-arrow-prev"></use></svg>
-      </a>
-    {% else %}
-      <span class="article-previous">
-        <svg><use xlink:href="#icon-arrow-prev"></use></svg>
-      </span>
-    {% endif %}
+</header> -->
 
-    {% if blog.next_article %}
-      <a class="article-next" href="{{ blog.next_article }}">
-        <svg><use xlink:href="#icon-arrow-next"></use></svg>
-      </a>
-    {% else %}
-      <span class="article-next">
-        <svg><use xlink:href="#icon-arrow-next"></use></svg>
-      </span>
-    {% endif %}
-  {% endif %}
-</header>
-
-<main class="page-wrapper article-wrapper">
-  {% if article.image %}
-    <figure class="article-image">
+<main class="page-wrapper article-wrapper article__page">
+  <!-- {% if article.image %}
+    <figure class="article__page__image">
       {{ article.image | img_url: "1024x" | img_tag }}
     </figure>
-  {% endif %}
+  {% endif %} -->
 
   <div class="article-content-wrapper grid-item-83">
-    <div class="article-content rich-text rte">
+    <div class="article__page__content">
       {{ article.content }}
     </div>
 
-    <div class="article-author">&mdash; {{ article.author }}</div>
+
 
     {% if article.tags.size > 0 %}
       <div class="article-tags">
@@ -53,8 +31,43 @@
         {% endfor %}
       </div>
     {% endif %}
+      <div class="article__page__share">
+        <div class="article__page__share__buttons">
+          {%- capture share_buttons -%}
+          {%- assign share_url = shop.url | append: article.url -%}
+          {%- assign twitter_text = article.title | url_param_escape -%}
+          {%- assign pinterest_description = article.excerpt_or_content | strip_html | truncatewords: 15 | url_param_escape -%}
+          {%- assign pinterest_image = article.image | img_url: 'large' | prepend: 'https:' -%}
+                  <a href="https://twitter.com/share?{% if twitter_text != blank %}text={{twitter_text}}&{% endif %}url={{ share_url }}" target="_blank" rel="noopener"}}">{%- render 'icon-twitter' -%}</a>
+                  <a href="https://www.facebook.com/sharer.php?u={{ share_url }}" target="_blank" rel="noopener"">{%- render 'icon-facebook' -%}</a>
+                  <a href="https://pinterest.com/pin/create/button/?url={{ share_url }}{% if pinterest_image != blank %}&media={{ pinterest_image }}{% endif %}&description={{ pinterest_description }}" target="_blank" rel="noopener"}}">{%- render 'icon-pinterest' -%}</a>
+          {%- endcapture -%}
+          {{ share_buttons }}
+        </div>
+        <div class="article__page__updated">
+          {% assign updated_at = article.updated_at | date: format: "date" %}
+          {{ 'blogs.article.updated_at' | t: updated_at: updated_at}}
+        </div>
+      </div>
 
-    {% render 'share', url: article.url, title: article.title, image: article.image, collection: blog.title %}
+      <div class="article__page__author">
+            <div class="article__page__author__image">
+              {{article.author.image | img_url: "140x" | img_tag}}
+            </div>
+            <div class="article__page__author__text">
+              <div class="article__page__author__text__name">
+                {% if section.settings.written_by%}
+                  <p>{{ section.settings.written_by}}</p>
+                {% endif%}
+                <h3>{{article.author}}</h3>
+              </div>
+              <div class="article__page__author__text__bio">
+                {{article.user.bio}}
+              </div>
+            </div>
+            
+      </div>
+      
 
     {% if blog.comments_enabled? %}
       {% paginate article.comments by 10 %}
@@ -129,5 +142,18 @@
       {% endpaginate %}
     {% endif %}
   </div>
-
 </main>
+
+{% schema %}
+  {
+    "name": "Blog post",
+    "settings": [
+      {
+        "type": "text",
+        "id": "written_by",
+        "label": "Text above authors name",
+        "default": "Written by"
+      }
+    ]
+  }
+  {% endschema %}

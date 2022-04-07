@@ -1,0 +1,9 @@
+.arrow__icon:hover{
+
+    svg{
+    align-self: center;
+    transform: translateX(26px);
+    transition: transform 0.35s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+
+}

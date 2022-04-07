@@ -63,7 +63,8 @@
     },
     "article": {
       "newer": "Newer",
-      "older": "Older"
+      "older": "Older",
+      "updated_at": "Updated {{updated_at}}"
     },
     "comments": {
       "title": "Comments ({{ count }})",
@@ -355,7 +356,7 @@
     "mailing_list": {
       "header": "Get the newsletter",
       "placeholder": "I'm interested in...",
-      "email": "Your email",
+      "email": "Email",
       "join": "Sign up"
     }
   },

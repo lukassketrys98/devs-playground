@@ -1,0 +1,6 @@
+@mixin subheading-font-stack {
+    @include base-font-styles;
+    font-family: 'Tenor Sans', sans-serif !important;
+    font-style: normal;
+    font-weight: 400;
+}
