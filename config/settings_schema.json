@@ -112,6 +112,22 @@
       },
       {
         "type": "header",
+        "content": "Primary Button"
+      },
+      {
+        "type": "color",
+        "id": "button_primary_bg_color",
+        "label": "Background Color",
+        "default": "#1A1A1A"
+      },
+      {
+        "type": "color",
+        "id": "button_primary_bg_color_hover",
+        "label": "Background Color Hover",
+        "default": "#C1A050"
+      },
+      {
+        "type": "header",
         "content": {
           "en": "Badges",
           "de": "Kennzeichnungen",

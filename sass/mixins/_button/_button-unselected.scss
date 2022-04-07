@@ -1,0 +1,13 @@
+@mixin button-unselected($style: default) {
+	@include button(
+        $color_light,
+		$color_light,
+        $color_light,
+        $color_light,
+        $color_light,
+        $color_light,
+		$color_primary,
+		$color_primary,
+		$style
+	);
+}

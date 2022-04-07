@@ -1,0 +1,233 @@
+{%- liquid
+  assign content_side = "left"
+  if section.settings.form_side == "right"
+    assign content_side = "right"
+  endif
+  assign enable_additional_fields = section.settings.enable_additional_fields
+  assign invert_colors = section.settings.invert_colors
+  assign add_background = section.settings.add_background
+  assign section_heading = section.settings.section_heading
+  assign section_subheading = section.settings.section_subheading
+ 
+-%}
+
+<section class="contact-us">
+    <div class="container contact-us__inner">
+        {% if add_background %}
+          {% if section.settings.form_image != blank %}
+          <style>
+              .contact-us .img {
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                height: 400px;
+              }
+          </style>
+          <div class="contact-us__image {% if content_side == "right" %}contact-us__image--right{% endif %} contact-us__image--mobile-hidden">
+            {%
+              render 'image-bg',
+              image_class: 'img',
+              image: section.settings.form_image,
+              image_default: false,
+              image_sizes: false,
+              image_additional_content: false,
+              image_dimension: false,
+              image_link: false
+            %}
+          </div> 
+
+          <div class="contact-us__image contact-us__image--mobile">
+            {%
+              render 'image-bg',
+              image_class: 'img',
+              image: section.settings.form_image_mobile,
+              image_default: false,
+              image_sizes: false,
+              image_additional_content: false,
+              image_dimension: false,
+              image_link: false
+            %}
+          </div> 
+          
+          {% else %}
+						<span class="svg-placeholder {% if content_side == "right" %}contact-us__placeholder--right{% endif %}">{{ 'lifestyle-1' | placeholder_svg_tag }}</span>
+          {% endif %}
+        {% endif %}
+        <div class="contact-us__content {% if content_side == "right" %}contact-us__content--right{% endif %}">
+          {% render 'contact-form', invert_colors: invert_colors, enable_additional_fields: enable_additional_fields %}
+
+          <div class="contact-us__text">
+            {% if section_heading != blank %}
+              <h2 class="contact-us__heading {% unless add_background %} contact-us__heading--no-background {% endunless %}">{{ section_heading }}</h2>
+            {% endif %}
+            {% if section_subheading != blank %}
+              <p class="contact-us__subheading {% unless add_background %} contact-us__subheading--no-background {% endunless %}">{{ section_subheading }}</p>
+            {% endif %}
+            {% for block in section.blocks %}
+              {%- liquid
+                assign heading = block.settings.heading
+              -%}
+              {%if block.type == 'address'%}
+                <div class="contact-us__info">
+                  {% render 'contact-icons' icon: 'address'%}
+                 {% render 'contact-us-info-block'
+                    heading: heading,
+                    subheading: block.settings.address,
+                    add_background: add_background
+                   %}
+              </div>
+              {% endif %}
+              {%if block.type == 'phone'%}
+                <div class="contact-us__info"> 
+                  {% render 'contact-icons' icon: 'phone'%}
+                 {% render 'contact-us-info-block'
+                    heading: heading,
+                    subheading: block.settings.number,
+                    add_background: add_background
+                   %}
+                </div>
+              {% endif %}
+              {%if block.type == 'email_address'%}
+                <div class="contact-us__info">
+                  {% render 'contact-icons' icon: 'email'%}
+                  {% render 'contact-us-info-block'
+                    heading: heading,
+                    subheading: block.settings.email
+                    add_background: add_background
+                   %}
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+    </div>
+</section>
+
+
+{% schema %}
+  {
+   "name": "Contact Form",
+   "settings":[
+        {
+          "type": "header",
+          "content": "Section settings"
+        },
+        {
+          "type": "text",
+          "id": "section_heading",
+          "label": "Section heading"
+        },
+        {
+          "type": "text",
+          "id": "section_subheading",
+          "label": "Section subheading"
+        },
+        {
+          "type": "header",
+          "content": "Form settings"
+        },
+        {
+          "type": "select",
+          "id": "form_side",
+          "label": "Form side",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_additional_fields",
+          "label": "Enable additional fields",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "invert_colors",
+          "label": "Invert colors"
+        },
+        {
+          "type": "header",
+          "content": "Image background"
+        },
+        {
+          "type": "checkbox",
+          "id": "add_background",
+          "label": "Add background"
+        },
+        {
+          "type": "image_picker",
+          "id": "form_image",
+          "label": "Form image"
+        },
+        {
+          "type": "image_picker",
+          "id": "form_image_mobile",
+          "label": "Form image for mobile"
+        }
+   ],
+   "blocks":[
+      {
+        "name": "Address",
+        "type": "address",
+        "settings":[
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading"
+          },
+          {
+            "type": "text",
+            "id": "address",
+            "label": "Address"
+          }
+        ]
+      },
+      {
+        "name": "Phone",
+        "type": "phone",
+        "settings":[
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading"
+          },
+          {
+            "type": "text",
+            "id": "number",
+            "label": "Phone number"
+          }
+        ]
+      },
+      {
+        "name": "Email address",
+        "type": "email_address",
+        "settings":[
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading"
+          },
+          {
+            "type": "text",
+            "id": "email",
+            "label": "Email address"
+          }
+        ]
+      }
+   ],
+    
+    "presets": [
+        {
+            "name": "Contact us"
+        }
+    ]
+  }
+    {% endschema %}
